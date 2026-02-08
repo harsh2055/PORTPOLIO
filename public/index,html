@@ -77,26 +77,26 @@
 
         /* Hero Section */
         header {
-            min-height: 80vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start; /* Aligns content to left */
+            align-items: flex-start; /* Default: Left align for desktop */
             text-align: left;
         }
 
         /* Profile Image Styling */
         .profile-wrapper {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .profile-img {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            object-fit: cover; /* Ensures image fills circle without distortion */
+            object-fit: cover;
             border: 4px solid var(--card-bg);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
         }
 
         .hero-content h1 {
@@ -115,7 +115,7 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 35px;
             background: var(--gradient);
             color: white;
             border-radius: 50px;
@@ -205,11 +205,25 @@
         /* Education Specific */
         .education-item {
             border-left: 3px solid #38bdf8;
-            padding-left: 20px;
-            margin-bottom: 30px;
+            padding-left: 25px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* Dot for timeline effect */
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
         }
         
-        .education-item h3 { margin-bottom: 5px; }
+        .education-item h3 { margin-bottom: 8px; }
         .education-item span { color: var(--text-muted); font-size: 0.9rem; }
 
         /* Meta tags for Certs */
@@ -220,7 +234,7 @@
             background: rgba(56, 189, 248, 0.1);
             color: var(--accent);
             border-radius: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         /* Contact Section */
@@ -241,12 +255,57 @@
             font-size: 0.9rem;
         }
 
-        /* Mobile Adjustments */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-            h2 { font-size: 1.75rem; }
-            section { padding: 40px 0; }
-            header { align-items: center; text-align: center; } /* Center align on mobile */
+            header {
+                align-items: center; /* Forces flex items to center */
+                text-align: center;  /* Forces text to center */
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 60px;
+            }
+            
+            .hero-content {
+                width: 100%;
+                text-align: center; /* Double check for text inside the div */
+            }
+
+            .hero-content h1 { 
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .profile-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                text-align: center;
+                display: block;
+            }
+
+            h2::after {
+                margin: 8px auto 0; /* Centers the underline */
+            }
+
+            .skills-grid {
+                justify-content: center; /* Centers skill tags */
+            }
+
+            .contact-info p {
+                justify-content: center; /* Centers contact info */
+            }
         }
     </style>
 </head>
@@ -267,7 +326,7 @@
 
         <section id="about">
             <h2>About Me</h2>
-            <p style="color: var(--text-muted); max-width: 700px;">
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; text-align: center;">
                 I am a passionate IT student from Mumbai focused on <strong>web development</strong> and <strong>backend systems</strong>.
                 I enjoy building real-world applications and utilizing AI tools to write cleaner code. I am eager to contribute to innovative projects and continuously improve my technical skills.
             </p>
