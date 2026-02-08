@@ -157,6 +157,14 @@
             flex-grow: 1;
         }
 
+        .project-link {
+            margin-top: auto;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         /* Skills Section */
         .skills-grid {
             display: flex;
@@ -242,7 +250,7 @@
             <h2>About Me</h2>
             <p style="color: var(--text-muted); max-width: 700px;">
                 I am a passionate IT student from Mumbai focused on <strong>web development</strong> and <strong>backend systems</strong>.
-                I enjoy building real-world applications and utilizing AI tools to write cleaner code. I am eager to contribute to innovative projects and continuously improve my technical skills[cite: 5, 6, 29].
+                I enjoy building real-world applications and utilizing AI tools to write cleaner code. I am eager to contribute to innovative projects and continuously improve my technical skills.
             </p>
         </section>
 
@@ -262,7 +270,8 @@
 
         <section id="education">
             <h2>Education</h2>
-            <div class="card" style="display: block;"> <div class="education-item">
+            <div class="card" style="display: block;">
+                <div class="education-item">
                     <h3>Bachelor of Science in Information Technology (B.Sc. IT)</h3>
                     <h4>Reena Mehta College, Mumbai University</h4>
                     <span>2023 - 2026 (Pursuing)</span>
@@ -282,16 +291,14 @@
                     <span class="meta-tag">Feb 2026</span>
                     <h3>Software Engineering Job Simulation</h3>
                     <h4>JPMorgan Chase & Co. (Forage)</h4>
-                    <p>Developed a Spring Boot microservice with Kafka integration. Implemented REST APIs and managed data persistence using Spring Data JPA and H2[cite: 39, 40].</p>
-                    <a href="#" style="font-size: 0.9rem;">View Credential &rarr;</a>
+                    <p>Developed a Spring Boot microservice with Kafka integration. Implemented REST APIs and managed data persistence using Spring Data JPA and H2.</p>
                 </div>
 
                 <div class="card">
                     <span class="meta-tag">Feb 2026</span>
                     <h3>Data Analytics Job Simulation</h3>
                     <h4>Deloitte Australia (Forage)</h4>
-                    <p>Performed data analysis and forensic technology tasks. Created interactive dashboards using Tableau and utilized Excel for business insights[cite: 41, 42].</p>
-                    <a href="#" style="font-size: 0.9rem;">View Credential &rarr;</a>
+                    <p>Performed data analysis and forensic technology tasks. Created interactive dashboards using Tableau and utilized Excel for business insights.</p>
                 </div>
             </div>
         </section>
@@ -301,14 +308,26 @@
             <div class="grid-layout">
                 <div class="card">
                     <h3><i class="fas fa-car"></i> Car Rental Website (DriveX)</h3>
-                    <p>A responsive full-stack web application featuring car listings, a booking system, and payment integration. Built with HTML, CSS, JavaScript, and MySQL[cite: 20, 21, 23].</p>
-                    <a href="#">View Code &rarr;</a>
+                    [cite_start]<p>A responsive full-stack web application featuring car listings, a booking system, and payment integration[cite: 20].</p>
+                    <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
                 </div>
 
                 <div class="card">
-                    <h3><i class="fas fa-code"></i> Code Review Web App</h3>
-                    <p>A collaborative platform designed for reviewing and analyzing code snippets with a focus on clean UI and usability.</p>
-                    <a href="#">View Code &rarr;</a>
+                    <h3><i class="fas fa-robot"></i> Code Critic AI</h3>
+                    <p>A collaborative platform designed for reviewing and analyzing code snippets, powered by AI for enhanced developer productivity.</p>
+                    <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-wallet"></i> Expense Flow</h3>
+                    <p>A financial tracking application designed to help users manage expenses, visualize spending habits, and maintain budget control.</p>
+                    <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
                 </div>
             </div>
         </section>
