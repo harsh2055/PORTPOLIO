@@ -12,16 +12,16 @@
     <style>
         :root {
             --bg-body: #0b0e14;
-            --bg-sidebar: rgba(11, 14, 20, 0.85);
-            --bg-card: rgba(21, 26, 35, 0.6);
+            --bg-sidebar: rgba(11, 14, 20, 0.9);
+            --bg-card: rgba(21, 26, 35, 0.5);
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent: #10b981; /* Neon Green */
-            --accent-glow: rgba(16, 185, 129, 0.5);
-            --border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         
         html { scroll-behavior: smooth; }
 
@@ -39,52 +39,25 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999;
             display: flex; justify-content: center; align-items: center;
-            flex-direction: column;
-            transition: opacity 0.5s ease;
+            flex-direction: column; transition: opacity 0.5s ease;
         }
-        .loader-text {
-            font-family: 'Space Grotesk', monospace;
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-        .loader-bar {
-            width: 200px; height: 2px; background: #333; position: relative; overflow: hidden;
-        }
-        .loader-bar::after {
-            content: ''; position: absolute; left: -50%; top: 0; height: 100%; width: 50%;
-            background: var(--accent); animation: loading 1.5s infinite ease-in-out;
-        }
+        .loader-text { font-family: 'Space Grotesk'; color: var(--accent); font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .loader-bar { width: 200px; height: 2px; background: #333; position: relative; overflow: hidden; }
+        .loader-bar::after { content: ''; position: absolute; left: -50%; top: 0; height: 100%; width: 50%; background: var(--accent); animation: loading 1.5s infinite ease-in-out; }
         @keyframes loading { 0% { left: -50%; } 100% { left: 100%; } }
 
-        /* --- CUSTOM CURSOR --- */
-        .cursor-dot, .cursor-outline {
-            position: fixed; top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 9999;
-            pointer-events: none;
-        }
+        /* --- CURSOR --- */
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
         .cursor-dot { width: 8px; height: 8px; background: var(--accent); }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 1px solid var(--accent);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        /* Hover Effect */
-        body.hovering .cursor-outline {
-            width: 60px; height: 60px;
-            background: rgba(16, 185, 129, 0.1);
-            border-color: transparent;
-        }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent); transition: all 0.2s ease-out; }
+        body.hovering .cursor-outline { width: 60px; height: 60px; background: rgba(16, 185, 129, 0.1); border-color: transparent; }
 
-        /* --- PARTICLES CONTAINER --- */
+        /* --- PARTICLES & PROGRESS --- */
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
-
-        /* --- SCROLL PROGRESS BAR --- */
         #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1000; }
         #progress-bar { height: 100%; background: var(--accent); width: 0%; box-shadow: 0 0 10px var(--accent); }
 
+        /* --- TYPOGRAPHY --- */
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
@@ -105,11 +78,7 @@
 
         .nav-links { list-style: none; margin-top: 40px; }
         .nav-links li { margin-bottom: 15px; }
-
-        .nav-links a {
-            display: flex; align-items: center; padding: 12px 15px; border-radius: 8px;
-            color: var(--text-muted); font-weight: 500; position: relative; overflow: hidden;
-        }
+        .nav-links a { display: flex; align-items: center; padding: 12px 15px; border-radius: 8px; color: var(--text-muted); font-weight: 500; position: relative; overflow: hidden; }
         .nav-links a:hover { color: var(--accent); background: rgba(16, 185, 129, 0.05); }
         .nav-links i { margin-right: 12px; width: 20px; }
 
@@ -124,7 +93,6 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         section { margin-bottom: 120px; scroll-margin-top: 80px; }
-
         .section-title { font-size: 2rem; margin-bottom: 40px; display: flex; align-items: center; }
         .section-title::after { content: ''; height: 1px; background: var(--border); flex: 1; margin-left: 20px; }
         .section-title span { color: var(--accent); margin-right: 10px; font-family: 'Space Grotesk'; }
@@ -133,7 +101,6 @@
         .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
         .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; letter-spacing: -2px; }
         .hero h2 { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 25px; }
-        
         .typing-text { color: var(--accent); position: relative; }
         .typing-text::after { content: '|'; position: absolute; right: -10px; animation: blink 0.7s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -143,96 +110,92 @@
             border-radius: 5px; font-weight: 600; display: inline-flex; align-items: center;
             gap: 10px; position: relative; overflow: hidden; background: transparent; z-index: 1;
         }
-        .btn::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
-            background: var(--accent); transition: 0.3s; z-index: -1;
-        }
+        .btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: var(--accent); transition: 0.3s; z-index: -1; }
         .btn:hover::after { height: 100%; }
         .btn:hover { color: #0b0e14; box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* --- CARDS --- */
+        /* --- MARQUEE SKILLS (NEW) --- */
+        .marquee {
+            width: 100%; overflow: hidden; white-space: nowrap; position: relative;
+            background: var(--bg-card); padding: 20px 0; border: 1px solid var(--border); border-radius: 12px;
+        }
+        .marquee:before, .marquee:after {
+            content: ""; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2;
+        }
+        .marquee:before { left: 0; background: linear-gradient(to right, var(--bg-body), transparent); }
+        .marquee:after { right: 0; background: linear-gradient(to left, var(--bg-body), transparent); }
+        
+        .marquee-content { display: inline-block; animation: scroll 20s linear infinite; }
+        
+        .tech-icon {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 10px 25px; margin: 0 15px;
+            border: 1px solid var(--border); border-radius: 50px;
+            background: rgba(255,255,255,0.03); color: var(--text-main); font-size: 1.1rem;
+        }
+        .tech-icon i { color: var(--accent); }
+        
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- CARDS (PROJECTS) --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
 
         .card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
             padding: 30px; display: flex; flex-direction: column; position: relative;
             transform-style: preserve-3d; transform: perspective(1000px);
+            transition: transform 0.1s;
         }
         .card-content { transform: translateZ(20px); }
         .card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); }
         .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
 
-        /* --- SKILLS --- */
-        .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
-        .skill-item {
-            background: rgba(255, 255, 255, 0.05); padding: 8px 18px; border-radius: 50px;
-            font-size: 0.9rem; color: var(--accent); border: 1px solid var(--border); transition: 0.3s;
+        /* --- TIMELINE (EDUCATION/CERTS) (NEW) --- */
+        .timeline { position: relative; border-left: 2px solid var(--border); margin-left: 10px; padding-left: 30px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -36px; top: 5px;
+            width: 10px; height: 10px; background: var(--bg-body);
+            border: 2px solid var(--accent); border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
         }
-        .skill-item:hover { background: var(--accent); color: #0b0e14; box-shadow: 0 0 15px var(--accent-glow); }
-
-        /* --- CERTIFICATES --- */
-        .cert-img {
-            width: 100%; border-radius: 8px; margin-bottom: 15px; border: 1px solid var(--border);
-            opacity: 0.85; transition: 0.4s; filter: grayscale(20%);
-        }
-        .card:hover .cert-img { opacity: 1; filter: grayscale(0%); }
-
-        .date-badge {
-            font-size: 0.75rem; color: var(--accent); font-family: 'Space Grotesk';
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block;
-        }
+        .timeline-date { font-size: 0.85rem; color: var(--accent); font-family: 'Space Grotesk'; margin-bottom: 5px; display: block; }
+        .timeline-title { font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
+        .timeline-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; }
         
-        /* --- CONTACT FORM --- */
-        .contact-form {
-            display: grid; gap: 20px;
-            background: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border);
+        .cert-img-small {
+            width: 100%; max-width: 200px; border-radius: 5px; margin-top: 10px;
+            border: 1px solid var(--border); opacity: 0.8; transition: 0.3s;
         }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
-            color: #fff; border-radius: 5px; font-family: 'Inter'; font-size: 1rem;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow);
-        }
-        .form-group textarea { height: 150px; resize: vertical; }
+        .timeline-item:hover .cert-img-small { opacity: 1; transform: scale(1.02); }
 
-        /* --- MOBILE --- */
-        .menu-toggle {
-            display: none; position: fixed; top: 20px; right: 20px;
-            background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent);
-            padding: 10px; border-radius: 5px; z-index: 200;
+        /* --- CONTACT FORM --- */
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
+            color: #fff; border-radius: 5px; font-family: 'Inter'; font-size: 1rem; margin-bottom: 15px;
         }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        
+        /* --- MOBILE --- */
+        .menu-toggle { display: none; position: fixed; top: 20px; right: 20px; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); padding: 10px; border-radius: 5px; z-index: 200; }
 
         @media (max-width: 900px) {
-            * { cursor: auto; /* Reset cursor for mobile */ }
-            .cursor-dot, .cursor-outline { display: none; }
-            
+            * { cursor: auto; } .cursor-dot, .cursor-outline { display: none; }
             .sidebar { transform: translateX(-100%); width: 280px; height: 100%; top: 0; left: 0; }
             .sidebar.active { transform: translateX(0); }
             .menu-toggle { display: block; }
             .main-content { margin-left: 0; padding: 40px 20px; }
             .hero h1 { font-size: 3rem; }
-            /* ADD THIS: */
-    #contact div {
-        grid-template-columns: 1fr !important; /* Stack form and stats on mobile */
-    }
-}
+            #contact-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader-text">INITIALIZING SYSTEM...</div>
-        <div class="loader-bar"></div>
-    </div>
-
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
+    <div id="preloader"><div class="loader-text">SYSTEM INITIALIZING</div><div class="loader-bar"></div></div>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
     <div id="particles-js"></div>
     <div id="progress-container"><div id="progress-bar"></div></div>
-
     <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 
     <aside class="sidebar" id="sidebar">
@@ -245,7 +208,7 @@
             <li><a href="#about" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-user"></i> About</a></li>
             <li><a href="#skills" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-code"></i> Skills</a></li>
             <li><a href="#projects" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-laptop-code"></i> Projects</a></li>
-            <li><a href="#certifications" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="#experience" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-history"></i> Experience</a></li>
             <li><a href="#contact" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-paper-plane"></i> Contact</a></li>
         </ul>
         <div class="social-links">
@@ -270,7 +233,7 @@
 
         <section id="about" class="reveal">
             <h2 class="section-title"><span>01.</span> About Me</h2>
-            <div style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;">
+            <div style="max-width: 800px;">
                 <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.05rem;">
                     Hello! My name is Harsh and I enjoy creating things that live on the internet. My journey started with a curiosity for how websites work, which led me to dive deep into <strong>HTML, CSS, and Java</strong>.
                     <br><br>
@@ -281,24 +244,23 @@
 
         <section id="skills" class="reveal">
             <h2 class="section-title"><span>02.</span> Tech Stack</h2>
-            <div class="grid">
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <h3><i class="fas fa-code" style="color: var(--accent);"></i> Languages</h3>
-                        <div class="skill-list">
-                            <span class="skill-item">Java</span><span class="skill-item">Python</span><span class="skill-item">JavaScript</span>
-                            <span class="skill-item">SQL</span><span class="skill-item">HTML5 & CSS3</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <h3><i class="fas fa-tools" style="color: var(--accent);"></i> Tools & Frameworks</h3>
-                        <div class="skill-list">
-                            <span class="skill-item">Spring Boot</span><span class="skill-item">Git & GitHub</span><span class="skill-item">VS Code</span>
-                            <span class="skill-item">Tableau</span><span class="skill-item">Gemini AI</span>
-                        </div>
-                    </div>
+            <div class="marquee hover-trigger">
+                <div class="marquee-content">
+                    <span class="tech-icon"><i class="fab fa-java"></i> Java</span>
+                    <span class="tech-icon"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-icon"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="tech-icon"><i class="fas fa-database"></i> MySQL</span>
+                    <span class="tech-icon"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="tech-icon"><i class="fas fa-leaf"></i> Spring Boot</span>
+                    <span class="tech-icon"><i class="fab fa-git-alt"></i> Git</span>
+                    <span class="tech-icon"><i class="fas fa-robot"></i> Gemini AI</span>
+                    <span class="tech-icon"><i class="fas fa-chart-line"></i> Tableau</span>
+                    <span class="tech-icon"><i class="fab fa-java"></i> Java</span>
+                    <span class="tech-icon"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-icon"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="tech-icon"><i class="fas fa-database"></i> MySQL</span>
+                    <span class="tech-icon"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="tech-icon"><i class="fas fa-leaf"></i> Spring Boot</span>
                 </div>
             </div>
         </section>
@@ -314,9 +276,7 @@
                         </div>
                         <h3>Car Rental (DriveX)</h3>
                         <p>Full-stack booking system with real-time availability checks.</p>
-                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                            <span>HTML</span><span>JS</span><span>MySQL</span>
-                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">HTML · JS · MySQL</p>
                     </div>
                 </div>
                 <div class="card hover-trigger" data-tilt>
@@ -327,9 +287,7 @@
                         </div>
                         <h3>Code Critic AI</h3>
                         <p>Intelligent platform providing instant code feedback using AI.</p>
-                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                            <span>React</span><span>Node.js</span><span>AI API</span>
-                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">React · Node · AI API</p>
                     </div>
                 </div>
                 <div class="card hover-trigger" data-tilt>
@@ -340,84 +298,68 @@
                         </div>
                         <h3>Expense Flow</h3>
                         <p>Personal finance dashboard for tracking budgets and spending.</p>
-                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                            <span>JS</span><span>Chart.js</span>
-                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">JS · Chart.js · CSS</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="certifications" class="reveal">
-            <h2 class="section-title"><span>04.</span> Certifications</h2>
-            <div class="grid">
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <img src="gemini-student.jpeg" alt="Cert" class="cert-img">
-                        <span class="date-badge">Jan 2026</span>
-                        <h3>Gemini Certified Student</h3>
-                    </div>
+        <section id="experience" class="reveal">
+            <h2 class="section-title"><span>04.</span> Journey & Certifications</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2023 - Present</span>
+                    <h3 class="timeline-title">B.Sc. Information Technology</h3>
+                    <p class="timeline-subtitle">Reena Mehta College, Mumbai University</p>
                 </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <img src="gemini-educator.jpeg" alt="Cert" class="cert-img">
-                        <span class="date-badge">Jan 2026</span>
-                        <h3>Gemini Certified Educator</h3>
-                    </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">Feb 2026</span>
+                    <h3 class="timeline-title">Software Engineering Job Simulation</h3>
+                    <p class="timeline-subtitle">JPMorgan Chase & Co. (Forage)</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Built Spring Boot microservices with Kafka & REST APIs.</p>
+                    <img src="jpmorgan.png" alt="Cert" class="cert-img-small hover-trigger">
                 </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <img src="jpmorgan.png" alt="Cert" class="cert-img">
-                        <span class="date-badge">Feb 2026</span>
-                        <h3>Software Engineering Sim</h3>
-                    </div>
+
+                 <div class="timeline-item">
+                    <span class="timeline-date">Feb 2026</span>
+                    <h3 class="timeline-title">Data Analytics Job Simulation</h3>
+                    <p class="timeline-subtitle">Deloitte Australia (Forage)</p>
+                    <img src="deloitte.png" alt="Cert" class="cert-img-small hover-trigger">
                 </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <img src="deloitte.png" alt="Cert" class="cert-img">
-                        <span class="date-badge">Feb 2026</span>
-                        <h3>Data Analytics Sim</h3>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">Jan 2026</span>
+                    <h3 class="timeline-title">Gemini Certified Professional</h3>
+                    <p class="timeline-subtitle">Google for Education</p>
+                    <div style="display: flex; gap: 10px;">
+                        <img src="gemini-student.jpeg" alt="Cert" class="cert-img-small hover-trigger" style="width: 120px;">
+                        <img src="gemini-educator.jpeg" alt="Cert" class="cert-img-small hover-trigger" style="width: 120px;">
                     </div>
                 </div>
             </div>
         </section>
 
-       <section id="contact" class="reveal" style="max-width: 900px; margin: 0 auto 100px auto;">
-    
-    <h2 class="section-title" style="justify-content: center;"><span>05.</span> Live Stats & Contact</h2>
+        <section id="contact" class="reveal" style="margin-bottom: 50px;">
+            <h2 class="section-title"><span>05.</span> Live Stats & Contact</h2>
+            <div id="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                
+                <div class="card" data-tilt style="padding: 20px;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fab fa-github" style="color: var(--accent);"></i> Activity</h3>
+                    <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=dark&hide_border=true&bg_color=00000000&title_color=10b981&icon_color=10b981&text_color=94a3b8" alt="Stats" style="width: 100%;">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=dark&hide_border=true&background=00000000&stroke=10b981&ring=10b981&fire=10b981&currStreakLabel=10b981&currStreakNum=e2e8f0&sideNums=e2e8f0&sideLabels=e2e8f0" alt="Streak" style="width: 100%; margin-top: 10px;">
+                </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
-        
-        <div class="card" data-tilt style="padding: 20px;">
-            <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fab fa-github" style="color: var(--accent);"></i> Coding Activity</h3>
-            <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=dark&hide_border=true&bg_color=00000000&title_color=10b981&icon_color=10b981&text_color=94a3b8" 
-                 alt="GitHub Stats" style="width: 100%; border-radius: 5px;">
-            
-            <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=dark&hide_border=true&background=00000000&stroke=10b981&ring=10b981&fire=10b981&currStreakLabel=10b981&currStreakNum=e2e8f0&sideNums=e2e8f0&sideLabels=e2e8f0" 
-                 alt="GitHub Streak" style="width: 100%; margin-top: 10px; border-radius: 5px;">
-        </div>
-
-        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af"> 
-            
-            <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: var(--text-main);">Send a Message</h3>
-            
-            <div class="form-group" style="margin-bottom: 15px;">
-                <input type="text" name="name" placeholder="Your Name" required class="hover-trigger" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;">
+                <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af"> 
+                    <input type="text" name="name" placeholder="Your Name" required class="hover-trigger">
+                    <input type="email" name="email" placeholder="Your Email" required class="hover-trigger">
+                    <textarea name="message" placeholder="Message" required class="hover-trigger" style="height: 120px;"></textarea>
+                    <button type="submit" class="btn hover-trigger" style="width: 100%; justify-content: center;">Send <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+                </form>
             </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-                <input type="email" name="email" placeholder="Your Email" required class="hover-trigger" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-                <textarea name="message" placeholder="Your Message" required class="hover-trigger" style="width: 100%; height: 120px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;"></textarea>
-            </div>
-            
-            <button type="submit" class="btn hover-trigger" style="width: 100%; justify-content: center;">
-                Send Now <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
-            </button>
-        </form>
-    </div>
-</section>
+        </section>
 
         <footer style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 20px;">
             <p>Designed & Built by Harsh Singh © 2026</p>
@@ -427,58 +369,41 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script>
-        // Preloader
-        window.addEventListener("load", function(){
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 500);
+        // Init Scripts
+        window.addEventListener("load", () => { document.getElementById('preloader').style.opacity = '0'; setTimeout(() => document.getElementById('preloader').style.display = 'none', 500); });
+        
+        // Cursor
+        const dot = document.querySelector('.cursor-dot'), outline = document.querySelector('.cursor-outline');
+        window.addEventListener("mousemove", (e) => { 
+            dot.style.left = `${e.clientX}px`; dot.style.top = `${e.clientY}px`; 
+            outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
-
-        // Custom Cursor
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener("mousemove", function(e){
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        document.querySelectorAll('.hover-trigger').forEach(i => {
+            i.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            i.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
-
-        // Hover Effect for Cursor
-        document.querySelectorAll('.hover-trigger').forEach(item => {
-            item.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            item.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
-
-        // Particles
-        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "size": { "value": 3 }, "color": { "value": "#10b981" }, "line_linked": { "enable": true, "distance": 150, "color": "#10b981", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 2 } }, "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } } });
-
-        // Tilt
-        VanillaTilt.init(document.querySelectorAll(".card"), { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
 
         // Typing
         const textElement = document.querySelector('.typing-text');
         const words = ["Developer.", "Creator.", "Innovator."];
-        let wordIndex = 0; let charIndex = 0; let isDeleting = false;
+        let w=0, c=0, d=false;
         function type() {
-            const currentWord = words[wordIndex];
-            if (isDeleting) { textElement.textContent = currentWord.substring(0, charIndex - 1); charIndex--; } 
-            else { textElement.textContent = currentWord.substring(0, charIndex + 1); charIndex++; }
-            if (!isDeleting && charIndex === currentWord.length) { isDeleting = true; setTimeout(type, 2000); } 
-            else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); } 
-            else { setTimeout(type, isDeleting ? 100 : 150); }
+            let word = words[w];
+            if(d) { textElement.textContent = word.substring(0, c-1); c--; } else { textElement.textContent = word.substring(0, c+1); c++; }
+            if(!d && c === word.length) { d=true; setTimeout(type, 2000); } else if(d && c===0) { d=false; w=(w+1)%words.length; setTimeout(type, 500); } else { setTimeout(type, d?100:150); }
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // Scroll
-        const revealElements = document.querySelectorAll('.reveal');
-        const progressBar = document.getElementById('progress-bar');
-        window.addEventListener('scroll', () => {
-            revealElements.forEach((reveal) => { if (reveal.getBoundingClientRect().top < window.innerHeight - 150) reveal.classList.add('active'); });
-            const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
-            progressBar.style.width = scrolled + "%";
-        });
+        // Particles & Tilt
+        particlesJS("particles-js", { "particles": { "number": { "value": 30 }, "size": { "value": 3 }, "color": { "value": "#10b981" }, "line_linked": { "enable": true, "distance": 150, "color": "#10b981", "opacity": 0.2 }, "move": { "enable": true, "speed": 1 } } });
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 10, speed: 400, glare: true, "max-glare": 0.1 });
 
+        // Menu & Scroll
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 150) r.classList.add('active'); });
+            document.getElementById('progress-bar').style.width = ((document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100) + "%";
+        });
     </script>
 </body>
 </html>
