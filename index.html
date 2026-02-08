@@ -50,6 +50,19 @@
             transition: width 0.1s ease-out;
         }
 
+        /* --- BACK TO TOP BUTTON --- */
+        #backToTop {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--accent-gradient); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; color: white; text-decoration: none;
+            opacity: 0; transition: 0.3s; z-index: 999;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            pointer-events: none; transform: translateY(10px);
+        }
+        #backToTop.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+        #backToTop:hover { transform: translateY(-5px); }
+
         h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; }
         
         .gradient-text {
@@ -192,6 +205,7 @@
         <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <ul class="nav-links">
             <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#services" onclick="toggleMenu()">Services</a></li>
             <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
             <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
             <li><a href="#contact" class="btn-nav" onclick="toggleMenu()">Hire Me</a></li>
@@ -241,6 +255,37 @@
         </div>
     </section>
 
+    <section id="services" class="reveal" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">What I <span class="gradient-text">Do</span></h2>
+            <div class="grid">
+                <div class="card" style="align-items: flex-start; text-align: left;">
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <i class="fas fa-laptop-code" style="font-size: 1.5rem; color: #818cf8;"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>I build fast, responsive, and accessible websites using modern tools like React and Tailwind CSS. My focus is on pixel-perfect design and smooth user interactions.</p>
+                </div>
+    
+                <div class="card" style="align-items: flex-start; text-align: left;">
+                    <div style="background: rgba(168, 85, 247, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <i class="fas fa-server" style="font-size: 1.5rem; color: #a855f7;"></i>
+                    </div>
+                    <h3>Backend Systems</h3>
+                    <p>I design robust APIs and database architectures using Java Spring Boot and MySQL. I ensure data integrity and secure communication between client and server.</p>
+                </div>
+    
+                <div class="card" style="align-items: flex-start; text-align: left;">
+                    <div style="background: rgba(236, 72, 153, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <i class="fas fa-brain" style="font-size: 1.5rem; color: #ec4899;"></i>
+                    </div>
+                    <h3>AI Integration</h3>
+                    <p>I leverage Gemini and OpenAI models to add intelligent features to applications. Skilled in Prompt Engineering to get precise, usable outputs from AI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="skills" class="reveal">
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Technical <span class="gradient-text">Expertise</span></h2>
@@ -279,12 +324,13 @@
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Coding <span class="gradient-text">Activity</span></h2>
             <div class="grid" style="grid-template-columns: 1fr;">
-                <div class="card" style="align-items: center;">
+                <div class="card" style="align-items: center; text-align: center;">
                     <h3 style="margin-bottom: 20px;">GitHub Contributions</h3>
-                    <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=tokyonight&hide_border=true&bg_color=00000000" 
-                         alt="GitHub Stats" class="stats-img" style="max-width: 500px;">
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=tokyonight&hide_border=true&background=00000000" 
-                         alt="GitHub Streak" class="stats-img" style="max-width: 500px; margin-top: 20px;">
+                    <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0f172a" 
+                         alt="GitHub Stats" class="stats-img" style="max-width: 100%; border-radius: 10px;">
+                         
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=tokyonight&hide_border=true&background=0f172a" 
+                         alt="GitHub Streak" class="stats-img" style="max-width: 100%; margin-top: 20px; border-radius: 10px;">
                 </div>
             </div>
         </div>
@@ -369,10 +415,15 @@
         </div>
     </footer>
 
+    <a href="#" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script>
         // 1. Scroll Animations & Progress
         const revealElements = document.querySelectorAll('.reveal');
         const progressBar = document.getElementById('progress-bar');
+        const backToTopButton = document.getElementById('backToTop');
         
         window.addEventListener('scroll', () => {
             // Reveal Sections
@@ -388,6 +439,13 @@
             // Progress Bar Width
             const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
             progressBar.style.width = scrolled + "%";
+
+            // Back to Top Button Logic
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
         });
 
         // 2. Mobile Menu Toggle
