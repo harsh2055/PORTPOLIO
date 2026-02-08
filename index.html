@@ -5,37 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harsh Singh | Software Developer</title>
     <link rel="icon" type="image/jpeg" href="profile.jpeg">
+    
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg-body: #0b0e14;
-            --bg-card: #151a23;
+            --bg-card: rgba(21, 26, 35, 0.7); /* Transparent for glass effect */
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent: #10b981; /* Neon Green */
-            --accent-glow: rgba(16, 185, 129, 0.2);
-            --border: #2d3748;
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --border: rgba(45, 55, 72, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             display: flex;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.05) 0%, transparent 20%);
         }
 
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* --- SIDEBAR NAVIGATION (Desktop) --- */
+        /* --- SIDEBAR --- */
         .sidebar {
             width: 280px;
-            background: var(--bg-card);
+            background: rgba(11, 14, 20, 0.95);
             border-right: 1px solid var(--border);
             position: fixed;
             height: 100vh;
@@ -43,64 +50,72 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        .profile-section { text-align: center; }
-        
         .profile-img {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 3px solid var(--accent);
-            padding: 3px;
+            padding: 4px;
             object-fit: cover;
             margin-bottom: 20px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: transform 0.5s ease;
         }
 
-        .nav-links {
-            list-style: none;
-            margin-top: 40px;
-        }
+        .profile-img:hover { transform: scale(1.05) rotate(5deg); }
 
+        .nav-links { list-style: none; margin-top: 40px; }
         .nav-links li { margin-bottom: 15px; }
 
         .nav-links a {
             display: flex;
             align-items: center;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 8px;
             color: var(--text-muted);
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; height: 100%; width: 0;
             background: rgba(16, 185, 129, 0.1);
-            color: var(--accent);
+            transition: 0.3s;
+            z-index: -1;
         }
 
+        .nav-links a:hover::before { width: 100%; }
+        .nav-links a:hover { color: var(--accent); transform: translateX(5px); }
         .nav-links i { margin-right: 12px; width: 20px; }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-links a {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-        .social-links a:hover { color: var(--accent); }
+        .social-links { display: flex; justify-content: center; gap: 20px; }
+        .social-links a { font-size: 1.3rem; color: var(--text-muted); }
+        .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
 
         /* --- MAIN CONTENT --- */
         .main-content {
             flex: 1;
-            margin-left: 280px; /* Width of sidebar */
+            margin-left: 280px;
             padding: 60px 80px;
+            position: relative;
         }
 
-        section { margin-bottom: 100px; scroll-margin-top: 50px; }
+        /* Scroll Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        section { margin-bottom: 120px; scroll-margin-top: 80px; }
 
         .section-title {
             font-size: 2rem;
@@ -117,39 +132,28 @@
             margin-left: 20px;
         }
 
-        .section-title span { color: var(--accent); margin-right: 10px; }
+        .section-title span { color: var(--accent); margin-right: 10px; font-family: 'Space Grotesk'; }
 
         /* --- HERO --- */
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+        
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
+        .hero h2 { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 25px; }
+        
+        /* Typing Effect Cursor */
+        .typing-text { color: var(--accent); position: relative; }
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: -10px;
+            animation: blink 0.7s infinite;
         }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
-
-        .hero p {
-            max-width: 600px;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
+        .hero p { max-width: 600px; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.8; }
 
         .btn {
-            padding: 15px 35px;
+            padding: 16px 35px;
             border: 1px solid var(--accent);
             color: var(--accent);
             border-radius: 5px;
@@ -157,13 +161,25 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            z-index: 1;
         }
 
-        .btn:hover {
-            background: rgba(16, 185, 129, 0.1);
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 0%;
+            background: var(--accent);
+            transition: 0.3s;
+            z-index: -1;
         }
 
-        /* --- GRID LAYOUTS --- */
+        .btn:hover::after { height: 100%; }
+        .btn:hover { color: #0b0e14; box-shadow: 0 0 20px var(--accent-glow); }
+
+        /* --- CARDS (Glassmorphism) --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -173,46 +189,42 @@
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
             border-radius: 12px;
-            padding: 25px;
-            transition: transform 0.3s ease, border-color 0.3s;
+            padding: 30px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: 100%;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: var(--accent);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); }
         .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
 
-        .project-link {
-            margin-top: auto;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
         /* --- SKILLS --- */
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
+        .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
         .skill-item {
-            background: rgba(45, 55, 72, 0.5);
-            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 18px;
             border-radius: 50px;
             font-size: 0.9rem;
-            color: var(--text-main);
-            border: 1px solid transparent;
+            color: var(--accent);
+            border: 1px solid var(--border);
+            transition: 0.3s;
         }
-        
-        .skill-item:hover { border-color: var(--accent); }
+        .skill-item:hover {
+            background: var(--accent);
+            color: #0b0e14;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
 
         /* --- CERTIFICATES --- */
         .cert-img {
@@ -220,59 +232,45 @@
             border-radius: 8px;
             margin-bottom: 15px;
             border: 1px solid var(--border);
-            opacity: 0.8;
-            transition: 0.3s;
+            opacity: 0.85;
+            transition: 0.4s;
+            filter: grayscale(20%);
         }
-        
-        .card:hover .cert-img { opacity: 1; }
+        .card:hover .cert-img { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
 
         .date-badge {
             font-size: 0.75rem;
             color: var(--accent);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Space Grotesk';
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
             display: block;
         }
 
-        /* --- MOBILE RESPONSIVENESS --- */
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
             body { flex-direction: column; }
-            
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 20px;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
+                width: 100%; height: auto; position: relative;
+                padding: 20px; border-right: none; border-bottom: 1px solid var(--border);
+                align-items: center;
             }
-
-            .nav-links { display: none; } /* Hide sidebar nav on mobile */
-            
-            .main-content {
-                margin-left: 0;
-                padding: 40px 20px;
-            }
-
+            .nav-links { display: none; }
+            .main-content { margin-left: 0; padding: 40px 20px; }
             .hero h1 { font-size: 3rem; }
-            .hero h2 { font-size: 1.8rem; }
-            
-            .profile-img { margin: 0 auto 15px auto; display: block; }
-            .profile-section h2 { font-size: 1.5rem; }
-            
-            .section-title { font-size: 1.5rem; }
+            .hero h2 { font-size: 1.5rem; }
+            .profile-img { margin-bottom: 10px; width: 100px; height: 100px; }
         }
     </style>
 </head>
 <body>
 
     <aside class="sidebar">
-        <div class="profile-section">
+        <div class="profile-section" style="text-align: center;">
             <img src="profile.jpeg" alt="Harsh Singh" class="profile-img">
-            <h2 style="font-size: 1.2rem; margin-bottom: 5px;">Harsh Singh</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">B.Sc IT Student</p>
+            <h2 style="font-size: 1.4rem; margin-bottom: 5px;">Harsh Singh</h2>
+            <p style="color: var(--accent); font-size: 0.9rem; font-family: 'Space Grotesk';">B.Sc IT Student</p>
         </div>
 
         <ul class="nav-links">
@@ -280,98 +278,117 @@
             <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
             <li><a href="#projects"><i class="fas fa-laptop-code"></i> Projects</a></li>
             <li><a href="#certifications"><i class="fas fa-certificate"></i> Certificates</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
         </ul>
 
         <div class="social-links">
             <a href="https://github.com/harsh2055" target="_blank"><i class="fab fa-github"></i></a>
             <a href="mailto:harshs288375@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
     </aside>
 
     <main class="main-content">
         
-        <section id="hero" class="hero">
-            <p style="color: var(--accent);">Hi, my name is</p>
+        <section id="hero" class="hero reveal active">
+            <p style="color: var(--accent); font-family: 'Space Grotesk'; margin-bottom: 20px;">Hi, my name is</p>
             <h1>Harsh Singh.</h1>
-            <h2>I build things for the web.</h2>
+            <h2>I am a <span class="typing-text"></span></h2>
             <p>
-                I am a software developer based in Mumbai, specializing in building (and occasionally designing) exceptional digital experiences. Currently, I'm focused on full-stack web development and AI integration.
+                I am a software developer based in Mumbai, specializing in building exceptional digital experiences. 
+                Currently focused on full-stack development, AI integration, and backend systems.
             </p>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <a href="2026-02-04 20-17-59.pdf" download="Harsh_Singh_Resume" class="btn">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="resume.pdf" download="Harsh_Singh_Resume" class="btn">
                     <i class="fas fa-download"></i> Download Resume
                 </a>
-                <a href="#contact" class="btn" style="background: transparent; border-color: var(--text-muted); color: var(--text-main);">
-                    Get In Touch
+                <a href="#contact" class="btn" style="border-color: var(--text-muted); color: var(--text-main);">
+                    Contact Me
                 </a>
             </div>
         </section>
 
-        <section id="about">
+        <section id="about" class="reveal">
             <h2 class="section-title"><span>01.</span> About Me</h2>
-            <p style="color: var(--text-muted); max-width: 700px; line-height: 1.7;">
-                Hello! My name is Harsh and I enjoy creating things that live on the internet. My interest in web development started back in college when I decided to try editing custom web themes — turns out hacking together HTML & CSS is pretty fun!
-                <br><br>
-                Fast-forward to today, I'm pursuing my <strong>B.Sc. in IT</strong> at Reena Mehta College. I've had the privilege of working on meaningful projects like a <strong>Car Rental System</strong> and an <strong>AI Code Critic</strong>. My main focus these days is building accessible, inclusive products and digital experiences.
-            </p>
+            <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 40px; align-items: center;">
+                <div>
+                    <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.05rem;">
+                        Hello! My name is Harsh and I enjoy creating things that live on the internet. My journey started with a curiosity for how websites work, which led me to dive deep into <strong>HTML, CSS, and Java</strong>.
+                        <br><br>
+                        Fast-forward to today, I'm a final year <strong>B.Sc. IT</strong> student at Reena Mehta College. I've built meaningful projects like a <strong>Car Rental System</strong> and an <strong>AI Code Critic</strong>. I'm passionate about writing clean, efficient code and solving real-world problems.
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" class="reveal">
             <h2 class="section-title"><span>02.</span> Tech Stack</h2>
             <div class="grid">
                 <div class="card">
-                    <h3><i class="fas fa-layer-group" style="color: var(--accent);"></i> Languages</h3>
+                    <h3><i class="fas fa-code" style="color: var(--accent);"></i> Languages</h3>
                     <div class="skill-list">
                         <span class="skill-item">Java</span>
                         <span class="skill-item">Python</span>
-                        <span class="skill-item">JavaScript (ES6+)</span>
-                        <span class="skill-item">HTML5</span>
-                        <span class="skill-item">CSS3</span>
+                        <span class="skill-item">JavaScript</span>
                         <span class="skill-item">SQL</span>
+                        <span class="skill-item">HTML5 & CSS3</span>
                     </div>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-tools" style="color: var(--accent);"></i> Frameworks & Tools</h3>
+                    <h3><i class="fas fa-tools" style="color: var(--accent);"></i> Tools & Frameworks</h3>
                     <div class="skill-list">
                         <span class="skill-item">Spring Boot</span>
                         <span class="skill-item">Git & GitHub</span>
                         <span class="skill-item">VS Code</span>
                         <span class="skill-item">Tableau</span>
-                        <span class="skill-item">Google Gemini AI</span>
+                        <span class="skill-item">Gemini AI</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="reveal">
             <h2 class="section-title"><span>03.</span> Projects</h2>
             <div class="grid">
                 <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                        <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                     <h3>Car Rental (DriveX)</h3>
-                    <p>A full-featured booking system allowing users to browse cars, check availability in real-time, and securely book vehicles. Built with HTML, CSS, JS, and MySQL.</p>
-                    <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" class="project-link">
-                        Live Demo <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <p>A full-stack booking system. Users can browse cars, check availability in real-time, and simulate secure bookings.</p>
+                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>HTML</span> <span>CSS</span> <span>JS</span> <span>MySQL</span>
+                    </div>
                 </div>
+
                 <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                        <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                     <h3>Code Critic AI</h3>
-                    <p>An intelligent platform for developers to get instant feedback on their code. Uses AI to analyze snippets for bugs and readability improvements.</p>
-                    <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" class="project-link">
-                        Live Demo <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <p>An intelligent platform providing instant feedback on code snippets. Uses AI to analyze logic and suggest improvements.</p>
+                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>React</span> <span>AI API</span> <span>Node.js</span>
+                    </div>
                 </div>
+
                 <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                        <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                     <h3>Expense Flow</h3>
-                    <p>A personal finance dashboard that visualizes spending habits. Features budget setting, expense categorization, and visual charts.</p>
-                    <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" class="project-link">
-                        Live Demo <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <p>A personal finance dashboard visualizing spending habits with budget setting and expense categorization.</p>
+                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>JS</span> <span>Chart.js</span> <span>CSS Grid</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="certifications">
+        <section id="certifications" class="reveal">
             <h2 class="section-title"><span>04.</span> Certifications</h2>
             <div class="grid">
                 <div class="card">
@@ -401,22 +418,70 @@
             </div>
         </section>
 
-        <section id="contact" style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <section id="contact" class="reveal" style="text-align: center; max-width: 600px; margin: 0 auto 100px auto;">
             <p style="color: var(--accent); font-family: 'Space Grotesk';">05. What's Next?</p>
             <h2 style="font-size: 3rem; margin-bottom: 20px;">Get In Touch</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">
-                I am currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">
+                I am actively looking for **Software Developer** roles. Whether you have a question or just want to say hi, my inbox is always open!
             </p>
             <a href="mailto:harshs288375@gmail.com" class="btn" style="font-size: 1.1rem; padding: 20px 40px;">
-                Say Hello
+                Say Hello <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
             </a>
         </section>
 
-        <footer style="text-align: center; margin-top: 100px; color: var(--text-muted); font-size: 0.8rem;">
+        <footer style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 20px;">
             <p>Designed & Built by Harsh Singh</p>
+            <p style="margin-top: 5px;">© 2026</p>
         </footer>
 
     </main>
 
+    <script>
+        // 1. Typing Animation
+        const textElement = document.querySelector('.typing-text');
+        const words = ["Developer.", "Student.", "Creator.", "Tech Enthusiast."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); // Wait before deleting
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500); // Wait before typing next word
+            } else {
+                setTimeout(type, isDeleting ? 100 : 150);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // 2. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+    </script>
 </body>
 </html>
