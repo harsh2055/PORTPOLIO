@@ -5,22 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Harsh Singh | Software Developer</title>
-    <meta name="description" content="Portfolio of Harsh Singh, a Software Developer specializing in Java, Python, and Full-Stack Web Development. View projects and resume.">
-    <meta name="keywords" content="Harsh Singh, Software Developer, Mumbai, Java, Spring Boot, React, Portfolio, Prompt Engineering">
-    <meta name="author" content="Harsh Singh">
+    <meta name="description" content="Portfolio of Harsh Singh, a Software Developer based in Mumbai specializing in Java, Python, and Full-Stack Web Development.">
     
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://portpolio-kappa.vercel.app/">
-    <meta property="og:title" content="Harsh Singh | Software Developer">
-    <meta property="og:description" content="Aspiring Software Developer based in Mumbai. Check out my projects, skills, and certifications.">
-    <meta property="og:image" content="profile.jpeg">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://portpolio-kappa.vercel.app/">
-    <meta property="twitter:title" content="Harsh Singh | Software Developer">
-    <meta property="twitter:description" content="Aspiring Software Developer based in Mumbai. Check out my projects and skills.">
-    <meta property="twitter:image" content="profile.jpeg">
-
     <link rel="icon" type="image/jpeg" href="profile.jpeg">
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -122,7 +108,7 @@
 
         .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
         
-        /* Typing Animation Cursor */
+        /* Typing Animation */
         .typing-text { color: var(--accent-solid); position: relative; font-weight: 600; }
         .typing-text::after { content: '|'; position: absolute; right: -8px; animation: blink 0.7s infinite; color: var(--text-main); }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -162,6 +148,9 @@
         .cert-img { width: 100%; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); opacity: 0.9; transition: 0.3s; }
         .card:hover .cert-img { opacity: 1; transform: scale(1.02); }
         .meta-date { font-size: 0.85rem; color: #818cf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+
+        /* --- GITHUB STATS --- */
+        .stats-img { width: 100%; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 20px; }
 
         /* --- CONTACT --- */
         .contact-wrapper {
@@ -205,7 +194,6 @@
             <li><a href="#about" onclick="toggleMenu()">About</a></li>
             <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
             <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-            <li><a href="#certifications" onclick="toggleMenu()">Certificates</a></li>
             <li><a href="#contact" class="btn-nav" onclick="toggleMenu()">Hire Me</a></li>
         </ul>
     </nav>
@@ -225,6 +213,30 @@
                 <a href="https://github.com/harsh2055" target="_blank" class="btn-secondary">
                     View GitHub <i class="fab fa-github"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">About <span class="gradient-text">Me</span></h2>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
+                <div>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">
+                        Hello! My name is Harsh and I enjoy creating things that live on the internet. My journey started with a curiosity for how websites work, which led me to dive deep into <strong>HTML, CSS, and Java</strong>.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">
+                        Fast-forward to today, I'm a final year <strong>B.Sc. IT</strong> student at Reena Mehta College. I've built meaningful projects like a <strong>Car Rental System</strong> and an <strong>AI Code Critic</strong>.
+                    </p>
+                </div>
+                <div class="card" style="text-align: center; border-color: var(--accent-solid);">
+                    <h3 style="margin-bottom: 20px;">🗣️ Languages</h3>
+                    <div class="skill-container" style="justify-content: center;">
+                        <span class="skill-pill">English (Fluent)</span>
+                        <span class="skill-pill">Hindi (Native)</span>
+                        <span class="skill-pill">Marathi (Fluent)</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -263,7 +275,22 @@
         </div>
     </section>
 
-    <section id="projects" style="background: rgba(255,255,255,0.02);" class="reveal">
+    <section id="activity" class="reveal" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Coding <span class="gradient-text">Activity</span></h2>
+            <div class="grid" style="grid-template-columns: 1fr;">
+                <div class="card" style="align-items: center;">
+                    <h3 style="margin-bottom: 20px;">GitHub Contributions</h3>
+                    <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=tokyonight&hide_border=true&bg_color=00000000" 
+                         alt="GitHub Stats" class="stats-img" style="max-width: 500px;">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=tokyonight&hide_border=true&background=00000000" 
+                         alt="GitHub Streak" class="stats-img" style="max-width: 500px; margin-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Featured <span class="gradient-text">Work</span></h2>
             <div class="grid">
@@ -289,7 +316,7 @@
         </div>
     </section>
 
-    <section id="certifications" class="reveal">
+    <section id="certifications" class="reveal" style="background: rgba(255,255,255,0.02);">
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Professional <span class="gradient-text">Certificates</span></h2>
             <div class="grid">
@@ -336,6 +363,10 @@
 
     <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted);">
         <p>© 2026 Harsh Singh. All rights reserved.</p>
+        <div style="margin-top: 15px; font-size: 1.2rem;">
+            <a href="https://github.com/harsh2055" target="_blank" style="color: var(--text-muted); margin: 0 10px;"><i class="fab fa-github"></i></a>
+            <a href="mailto:harshs288375@gmail.com" style="color: var(--text-muted); margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+        </div>
     </footer>
 
     <script>
@@ -365,9 +396,9 @@
             navLinks.classList.toggle('active');
         }
 
-        // 3. Typing Animation (Restored)
+        // 3. Typing Animation
         const textElement = document.querySelector('.typing-text');
-        const words = ["Developer.", "Creator.", "Prompt Engineer.", "Tech Enthusiast."];
+        const words = ["Developer.", "Prompt Engineer.", "Creator.", "Tech Enthusiast."];
         let w=0, c=0, d=false;
         function type() {
             let word = words[w];
