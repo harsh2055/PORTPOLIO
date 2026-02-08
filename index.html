@@ -39,11 +39,11 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
 
         /* Typography */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-weight: 700;
             line-height: 1.2;
         }
@@ -77,7 +77,7 @@
 
         /* Hero Section */
         header {
-            min-height: 90vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -114,6 +114,49 @@
             color: white;
         }
 
+        /* General Card Grid (Projects & Certs) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .card h4 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
         /* Skills Section */
         .skills-grid {
             display: flex;
@@ -136,36 +179,25 @@
             transform: scale(1.05);
         }
 
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* Education Specific */
+        .education-item {
+            border-left: 3px solid #38bdf8;
+            padding-left: 20px;
+            margin-bottom: 30px;
         }
+        
+        .education-item h3 { margin-bottom: 5px; }
+        .education-item span { color: var(--text-muted); font-size: 0.9rem; }
 
-        .card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
+        /* Meta tags for Certs */
+        .meta-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
 
         /* Contact Section */
@@ -190,7 +222,7 @@
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 3rem; }
             h2 { font-size: 1.75rem; }
-            section { padding: 50px 0; }
+            section { padding: 40px 0; }
         }
     </style>
 </head>
@@ -209,8 +241,8 @@
         <section id="about">
             <h2>About Me</h2>
             <p style="color: var(--text-muted); max-width: 700px;">
-                I am a passionate IT student focused on <strong>web development</strong> and <strong>backend systems</strong>.
-                I enjoy building real-world applications that solve problems and am dedicated to continuously improving my technical skills through hands-on projects.
+                I am a passionate IT student from Mumbai focused on <strong>web development</strong> and <strong>backend systems</strong>.
+                I enjoy building real-world applications and utilizing AI tools to write cleaner code. I am eager to contribute to innovative projects and continuously improve my technical skills[cite: 5, 6, 29].
             </p>
         </section>
 
@@ -220,20 +252,56 @@
                 <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
                 <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
                 <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
-                <span class="skill-tag"><i class="fas fa-database"></i> SQL</span>
-                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
-                <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5/CSS3</span>
                 <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot</span>
-                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git & GitHub</span>
+                <span class="skill-tag"><i class="fas fa-chart-line"></i> Tableau</span>
+                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="card" style="display: block;"> <div class="education-item">
+                    <h3>Bachelor of Science in Information Technology (B.Sc. IT)</h3>
+                    <h4>Reena Mehta College, Mumbai University</h4>
+                    <span>2023 - 2026 (Pursuing)</span>
+                </div>
+                <div class="education-item" style="margin-bottom: 0;">
+                    <h3>Higher Secondary Certificate (HSC) - Science</h3>
+                    <h4>Thakur College of Science and Commerce</h4>
+                    <span>2022 - 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications & Simulations</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="meta-tag">Feb 2026</span>
+                    <h3>Software Engineering Job Simulation</h3>
+                    <h4>JPMorgan Chase & Co. (Forage)</h4>
+                    <p>Developed a Spring Boot microservice with Kafka integration. Implemented REST APIs and managed data persistence using Spring Data JPA and H2[cite: 39, 40].</p>
+                    <a href="#" style="font-size: 0.9rem;">View Credential &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <span class="meta-tag">Feb 2026</span>
+                    <h3>Data Analytics Job Simulation</h3>
+                    <h4>Deloitte Australia (Forage)</h4>
+                    <p>Performed data analysis and forensic technology tasks. Created interactive dashboards using Tableau and utilized Excel for business insights[cite: 41, 42].</p>
+                    <a href="#" style="font-size: 0.9rem;">View Credential &rarr;</a>
+                </div>
             </div>
         </section>
 
         <section id="projects">
             <h2>Featured Projects</h2>
-            <div class="projects-grid">
+            <div class="grid-layout">
                 <div class="card">
-                    <h3><i class="fas fa-car"></i> Car Rental Website</h3>
-                    <p>A responsive booking system featuring seamless frontend and backend integration for real-time vehicle reservations.</p>
+                    <h3><i class="fas fa-car"></i> Car Rental Website (DriveX)</h3>
+                    <p>A responsive full-stack web application featuring car listings, a booking system, and payment integration. Built with HTML, CSS, JavaScript, and MySQL[cite: 20, 21, 23].</p>
                     <a href="#">View Code &rarr;</a>
                 </div>
 
@@ -248,7 +316,8 @@
         <section id="contact">
             <h2>Contact</h2>
             <div class="contact-info">
-                <p><i class="fas fa-envelope" style="color: var(--accent);"></i> harshs1929@gmail.com</p>
+                <p><i class="fas fa-envelope" style="color: var(--accent);"></i> harshs288375@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> Mumbai, Maharashtra</p>
                 <p>
                     <i class="fab fa-github" style="color: var(--accent);"></i> 
                     <a href="https://github.com/harsh2055" target="_blank">github.com/harsh2055</a>
