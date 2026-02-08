@@ -142,16 +142,32 @@
         }
         input:focus, textarea:focus { outline: none; border-color: #818cf8; }
 
-        /* --- MOBILE NAV --- */
+        /* --- MOBILE OPTIMIZATION (UPDATED) --- */
         @media (max-width: 768px) {
+            
+            /* Tighten up spacing between sections */
+            section { padding: 50px 0; }
+
+            /* Fix Hero Spacing */
+            .hero { min-height: auto; padding-top: 120px; padding-bottom: 60px; }
+            .hero h1 { font-size: 2.5rem; line-height: 1.2; }
+            .hero p { font-size: 1.1rem; }
+            
+            /* Smaller Profile Image on Mobile */
+            .profile-img-lg { width: 130px; height: 130px; margin-bottom: 20px; }
+
+            /* Grid Gap Reduction */
+            .grid { gap: 20px; }
+
+            /* Mobile Menu */
             .nav-links {
-                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
                 background: #0f172a; flex-direction: column; justify-content: center;
                 align-items: center; transition: 0.4s ease; border-left: 1px solid var(--border);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
             }
             .nav-links.active { right: 0; }
             .menu-btn { display: block; z-index: 1001; }
-            .hero h1 { font-size: 2.8rem; }
             .form-row { grid-template-columns: 1fr; }
         }
     </style>
@@ -276,7 +292,7 @@
                     <p style="color: var(--text-muted);">Have a project in mind or want to hire me?</p>
                 </div>
                 <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
                     <div class="form-row">
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
@@ -295,53 +311,20 @@
     </footer>
 
     <script>
-        // 1. Scroll Animations (Fade Up)
         const revealElements = document.querySelectorAll('.reveal');
         window.addEventListener('scroll', () => {
             revealElements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight - 150) {
-                    element.classList.add('active');
-                }
+                if (elementTop < window.innerHeight - 150) element.classList.add('active');
             });
-            
-            // Navbar Glass Effect
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
         });
 
-        // 2. Mobile Menu Toggle
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
-
-        // 3. Active Link Highlighter
-        const sections = document.querySelectorAll('section');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
-        });
     </script>
 
 </body>
