@@ -377,21 +377,42 @@
             </div>
         </section>
 
-        <section id="contact" class="reveal" style="max-width: 600px; margin: 0 auto 100px auto;">
-            <h2 class="section-title" style="justify-content: center;"><span>05.</span> Get In Touch</h2>
-            <form class="contact-form" action="mailto:harshs288375@gmail.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required class="hover-trigger">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required class="hover-trigger">
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Your Message" required class="hover-trigger"></textarea>
-                </div>
-                <button type="submit" class="btn hover-trigger" style="width: 100%; justify-content: center;">Send Message <i class="fas fa-paper-plane"></i></button>
-            </form>
-        </section>
+       <section id="contact" class="reveal" style="max-width: 900px; margin: 0 auto 100px auto;">
+    
+    <h2 class="section-title" style="justify-content: center;"><span>05.</span> Live Stats & Contact</h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+        
+        <div class="card" data-tilt style="padding: 20px;">
+            <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fab fa-github" style="color: var(--accent);"></i> Coding Activity</h3>
+            <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=dark&hide_border=true&bg_color=00000000&title_color=10b981&icon_color=10b981&text_color=94a3b8" 
+                 alt="GitHub Stats" style="width: 100%; border-radius: 5px;">
+            
+            <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=dark&hide_border=true&background=00000000&stroke=10b981&ring=10b981&fire=10b981&currStreakLabel=10b981&currStreakNum=e2e8f0&sideNums=e2e8f0&sideLabels=e2e8f0" 
+                 alt="GitHub Streak" style="width: 100%; margin-top: 10px; border-radius: 5px;">
+        </div>
+
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af"> 
+            
+            <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: var(--text-main);">Send a Message</h3>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <input type="text" name="name" placeholder="Your Name" required class="hover-trigger" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <input type="email" name="email" placeholder="Your Email" required class="hover-trigger" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <textarea name="message" placeholder="Your Message" required class="hover-trigger" style="width: 100%; height: 120px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; border-radius: 5px;"></textarea>
+            </div>
+            
+            <button type="submit" class="btn hover-trigger" style="width: 100%; justify-content: center;">
+                Send Now <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+            </button>
+        </form>
+    </div>
+</section>
 
         <footer style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 20px;">
             <p>Designed & Built by Harsh Singh © 2026</p>
