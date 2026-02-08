@@ -1,100 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Harsh Singh | Portfolio</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Singh | Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body {
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
-            color: white;
+            padding: 0;
         }
 
-        header {
-            text-align: center;
-            padding: 60px 20px;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        header h1 {
-            font-size: 40px;
+        /* Layout & Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         section {
-            padding: 50px 20px;
-            max-width: 900px;
-            margin: auto;
+            padding: 80px 0;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         h2 {
-            color: #38bdf8;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--gradient);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
             margin-bottom: 20px;
+        }
+
+        /* Contact Section */
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: #020617;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid #334155;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        a {
-            color: #38bdf8;
-            text-decoration: none;
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
+            h2 { font-size: 1.75rem; }
+            section { padding: 50px 0; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Harsh Singh</h1>
-    <p>Aspiring Software Developer | BSc IT Student</p>
-</header>
+    <div class="container">
+        <header>
+            <div class="hero-content">
+                <p>Hello, I'm</p>
+                <h1>Harsh Singh</h1>
+                <p>Aspiring Software Developer & BSc IT Student</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        I am a passionate IT student focused on web development and backend systems.
-        I enjoy building real-world applications and continuously improving my skills.
-    </p>
-</section>
+        <section id="about">
+            <h2>About Me</h2>
+            <p style="color: var(--text-muted); max-width: 700px;">
+                I am a passionate IT student focused on <strong>web development</strong> and <strong>backend systems</strong>.
+                I enjoy building real-world applications that solve problems and am dedicated to continuously improving my technical skills through hands-on projects.
+            </p>
+        </section>
 
-<section>
-    <h2>Skills</h2>
-    <div class="card">
-        <p>Python, Java, JavaScript, SQL</p>
-        <p>HTML, CSS, Spring Boot</p>
-        <p>Git, GitHub, VS Code</p>
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> SQL</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
+                <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
+                <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot</span>
+                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git & GitHub</span>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="card">
+                    <h3><i class="fas fa-car"></i> Car Rental Website</h3>
+                    <p>A responsive booking system featuring seamless frontend and backend integration for real-time vehicle reservations.</p>
+                    <a href="#">View Code &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Code Review Web App</h3>
+                    <p>A collaborative platform designed for reviewing and analyzing code snippets with a focus on clean UI and usability.</p>
+                    <a href="#">View Code &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope" style="color: var(--accent);"></i> harshs1929@gmail.com</p>
+                <p>
+                    <i class="fab fa-github" style="color: var(--accent);"></i> 
+                    <a href="https://github.com/harsh2055" target="_blank">github.com/harsh2055</a>
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Harsh Singh. Built with code.</p>
+        </footer>
     </div>
-</section>
-
-<section>
-    <h2>Projects</h2>
-    <div class="card">
-        <h3>Car Rental Website</h3>
-        <p>Responsive booking system with frontend and backend integration.</p>
-    </div>
-
-    <div class="card">
-        <h3>Code Review Web App</h3>
-        <p>Platform for reviewing and analyzing code with clean UI design.</p>
-    </div>
-</section>
-
-<section>
-    <h2>Contact</h2>
-    <p>Email: harshs1929@gmail.com</p>
-    <p>GitHub: <a href="#">github.com/harsh2055</a></p>
-</sectio
-
-<footer>
-    <p>© 2026 Harsh Singh</p>
-</footer>
 
 </body>
 </html>
