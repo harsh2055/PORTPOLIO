@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Singh | Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Layout & Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--gradient);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start; /* Default: Left align for desktop */
+            text-align: left;
+        }
+
+        /* Profile Image Styling */
+        .profile-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* General Card Grid (Projects & Certs) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .card h4 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            margin-top: auto;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* Education Specific */
+        .education-item {
+            border-left: 3px solid #38bdf8;
+            padding-left: 25px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* Dot for timeline effect */
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .education-item h3 { margin-bottom: 8px; }
+        .education-item span { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Meta tags for Certs */
+        .meta-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid #334155;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            header {
+                align-items: center; /* Forces flex items to center */
+                text-align: center;  /* Forces text to center */
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 60px;
+            }
+            
+            .hero-content {
+                width: 100%;
+                text-align: center; /* Double check for text inside the div */
+            }
+
+            .hero-content h1 { 
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .profile-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                text-align: center;
+                display: block;
+            }
+
+            h2::after {
+                margin: 8px auto 0; /* Centers the underline */
+            }
+
+            .skills-grid {
+                justify-content: center; /* Centers skill tags */
+            }
+
+            .contact-info p {
+                justify-content: center; /* Centers contact info */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="profile-wrapper">
+                <img src="profile.jpeg" alt="Harsh Singh" class="profile-img">
+            </div>
+            <div class="hero-content">
+                <p>Hello, I'm</p>
+                <h1>Harsh Singh</h1>
+                <p>Aspiring Software Developer & BSc IT Student</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </header>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; text-align: center;">
+                I am a passionate IT student from Mumbai focused on <strong>web development</strong> and <strong>backend systems</strong>.
+                I enjoy building real-world applications and utilizing AI tools to write cleaner code. I am eager to contribute to innovative projects and continuously improve my technical skills.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5/CSS3</span>
+                <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot</span>
+                <span class="skill-tag"><i class="fas fa-chart-line"></i> Tableau</span>
+                <span class="skill-tag"><i class="fas fa-robot"></i> Google Gemini AI</span>
+                <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="card" style="display: block;">
+                <div class="education-item">
+                    <h3>Bachelor of Science in Information Technology (B.Sc. IT)</h3>
+                    <h4>Reena Mehta College, Mumbai University</h4>
+                    <span>2023 - 2026 (Pursuing)</span>
+                </div>
+                <div class="education-item" style="margin-bottom: 0;">
+                    <h3>Higher Secondary Certificate (HSC) - Science</h3>
+                    <h4>Thakur College of Science and Commerce</h4>
+                    <span>2022 - 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications & Simulations</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="meta-tag">Jan 2026</span>
+                    <h3>Gemini Certified Student</h3>
+                    <h4>Google for Education</h4>
+                    <p>Verified proficiency in knowledge, skills, and basic competencies needed to use Google AI tools effectively.</p>
+                </div>
+
+                 <div class="card">
+                    <span class="meta-tag">Jan 2026</span>
+                    <h3>Gemini Certified Educator</h3>
+                    <h4>Google for Education</h4>
+                    <p>Demonstrated capability in utilizing Google AI technologies within educational and instructional contexts.</p>
+                </div>
+
+                <div class="card">
+                    <span class="meta-tag">Feb 2026</span>
+                    <h3>Software Engineering Job Simulation</h3>
+                    <h4>JPMorgan Chase & Co. (Forage)</h4>
+                    <p>Developed a Spring Boot microservice with Kafka integration. Implemented REST APIs and managed data persistence.</p>
+                </div>
+
+                <div class="card">
+                    <span class="meta-tag">Feb 2026</span>
+                    <h3>Data Analytics Job Simulation</h3>
+                    <h4>Deloitte Australia (Forage)</h4>
+                    <p>Performed data analysis and forensic technology tasks. Created interactive dashboards using Tableau and Excel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3><i class="fas fa-car"></i> Car Rental Website (DriveX)</h3>
+                    <p>A responsive full-stack web application featuring car listings, a booking system, and payment integration.</p>
+                    <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-robot"></i> Code Critic AI</h3>
+                    <p>A collaborative platform designed for reviewing and analyzing code snippets, powered by AI for enhanced productivity.</p>
+                    <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-wallet"></i> Expense Flow</h3>
+                    <p>A financial tracking application designed to help users manage expenses, visualize spending habits, and maintain budget control.</p>
+                    <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" class="project-link">
+                        Live Demo <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope" style="color: var(--accent);"></i> harshs288375@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> Mumbai, Maharashtra</p>
+                <p>
+                    <i class="fab fa-github" style="color: var(--accent);"></i> 
+                    <a href="https://github.com/harsh2055" target="_blank">github.com/harsh2055</a>
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Harsh Singh. Built with code.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
