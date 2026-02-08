@@ -3,407 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harsh Singh | Software Developer</title>
+    <title>Harsh Singh | Developer Portfolio</title>
     <link rel="icon" type="image/jpeg" href="profile.jpeg">
     
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-body: #0b0e14;
-            --bg-sidebar: rgba(11, 14, 20, 0.9);
-            --bg-card: rgba(21, 26, 35, 0.5);
-            --text-main: #e2e8f0;
+            --bg-dark: #0f172a; /* Deep Navy */
+            --bg-card: rgba(30, 41, 59, 0.7); /* Glass Blue */
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent: #10b981; /* Neon Green */
-            --accent-glow: rgba(16, 185, 129, 0.4);
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); /* Indigo to Purple */
+            --accent-solid: #818cf8;
             --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15) 0%, transparent 25%);
+            background-attachment: fixed;
         }
-
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column; transition: opacity 0.5s ease;
-        }
-        .loader-text { font-family: 'Space Grotesk'; color: var(--accent); font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
-        .loader-bar { width: 200px; height: 2px; background: #333; position: relative; overflow: hidden; }
-        .loader-bar::after { content: ''; position: absolute; left: -50%; top: 0; height: 100%; width: 50%; background: var(--accent); animation: loading 1.5s infinite ease-in-out; }
-        @keyframes loading { 0% { left: -50%; } 100% { left: 100%; } }
-
-        /* --- CURSOR --- */
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 8px; height: 8px; background: var(--accent); }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent); transition: all 0.2s ease-out; }
-        body.hovering .cursor-outline { width: 60px; height: 60px; background: rgba(16, 185, 129, 0.1); border-color: transparent; }
-
-        /* --- PARTICLES & PROGRESS --- */
-        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
-        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1000; }
-        #progress-bar { height: 100%; background: var(--accent); width: 0%; box-shadow: 0 0 10px var(--accent); }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 280px; background: var(--bg-sidebar); border-right: 1px solid var(--border);
-            position: fixed; height: 100vh; padding: 40px 30px;
-            display: flex; flex-direction: column; justify-content: space-between;
-            z-index: 100; backdrop-filter: blur(15px); transition: transform 0.3s ease;
-        }
-
-        .profile-img {
-            width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent);
-            padding: 4px; object-fit: cover; margin-bottom: 20px;
-            box-shadow: 0 0 25px var(--accent-glow); transition: transform 0.5s ease;
-        }
-        .profile-img:hover { transform: scale(1.05) rotate(5deg); }
-
-        .nav-links { list-style: none; margin-top: 40px; }
-        .nav-links li { margin-bottom: 15px; }
-        .nav-links a { display: flex; align-items: center; padding: 12px 15px; border-radius: 8px; color: var(--text-muted); font-weight: 500; position: relative; overflow: hidden; }
-        .nav-links a:hover { color: var(--accent); background: rgba(16, 185, 129, 0.05); }
-        .nav-links i { margin-right: 12px; width: 20px; }
-
-        .social-links { display: flex; justify-content: center; gap: 20px; }
-        .social-links a { font-size: 1.3rem; color: var(--text-muted); }
-        .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
-
-        /* --- MAIN CONTENT --- */
-        .main-content { flex: 1; margin-left: 280px; padding: 60px 80px; position: relative; }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        section { margin-bottom: 120px; scroll-margin-top: 80px; }
-        .section-title { font-size: 2rem; margin-bottom: 40px; display: flex; align-items: center; }
-        .section-title::after { content: ''; height: 1px; background: var(--border); flex: 1; margin-left: 20px; }
-        .section-title span { color: var(--accent); margin-right: 10px; font-family: 'Space Grotesk'; }
-
-        /* --- HERO --- */
-        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; letter-spacing: -2px; }
-        .hero h2 { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 25px; }
-        .typing-text { color: var(--accent); position: relative; }
-        .typing-text::after { content: '|'; position: absolute; right: -10px; animation: blink 0.7s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .btn {
-            padding: 16px 35px; border: 1px solid var(--accent); color: var(--accent);
-            border-radius: 5px; font-weight: 600; display: inline-flex; align-items: center;
-            gap: 10px; position: relative; overflow: hidden; background: transparent; z-index: 1;
-        }
-        .btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: var(--accent); transition: 0.3s; z-index: -1; }
-        .btn:hover::after { height: 100%; }
-        .btn:hover { color: #0b0e14; box-shadow: 0 0 20px var(--accent-glow); }
-
-        /* --- MARQUEE SKILLS (NEW) --- */
-        .marquee {
-            width: 100%; overflow: hidden; white-space: nowrap; position: relative;
-            background: var(--bg-card); padding: 20px 0; border: 1px solid var(--border); border-radius: 12px;
-        }
-        .marquee:before, .marquee:after {
-            content: ""; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2;
-        }
-        .marquee:before { left: 0; background: linear-gradient(to right, var(--bg-body), transparent); }
-        .marquee:after { right: 0; background: linear-gradient(to left, var(--bg-body), transparent); }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; }
         
-        .marquee-content { display: inline-block; animation: scroll 20s linear infinite; }
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 20px 5%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; }
+        .logo span { color: var(--accent-solid); }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { 
+            color: var(--text-muted); text-decoration: none; font-weight: 500; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: #fff; }
+
+        .btn-nav {
+            background: var(--accent-gradient);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .btn-nav:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section { padding: 100px 0; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
         
-        .tech-icon {
+        .profile-img-lg {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.1);
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
+        
+        .btn-primary {
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 10px 25px; margin: 0 15px;
-            border: 1px solid var(--border); border-radius: 50px;
-            background: rgba(255,255,255,0.03); color: var(--text-main); font-size: 1.1rem;
+            padding: 16px 36px;
+            background: var(--accent-gradient);
+            color: white; border-radius: 8px; font-weight: 600; text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.4);
         }
-        .tech-icon i { color: var(--accent); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px -5px rgba(99, 102, 241, 0.5); }
         
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            color: white; border-radius: 8px; font-weight: 600; text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        /* --- CARDS (PROJECTS) --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        /* --- CARDS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
         .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-            padding: 30px; display: flex; flex-direction: column; position: relative;
-            transform-style: preserve-3d; transform: perspective(1000px);
-            transition: transform 0.1s;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex; flex-direction: column;
         }
-        .card-content { transform: translateZ(20px); }
-        .card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: var(--shadow);
+        }
 
-        /* --- TIMELINE (EDUCATION/CERTS) (NEW) --- */
-        .timeline { position: relative; border-left: 2px solid var(--border); margin-left: 10px; padding-left: 30px; }
-        .timeline-item { position: relative; margin-bottom: 40px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        .card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 20px; flex-grow: 1; }
+
+        /* --- SKILLS PILLS --- */
+        .skill-container { display: flex; flex-wrap: wrap; gap: 12px; }
+        .skill-pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .skill-pill i { color: #818cf8; }
+
+        /* --- CERTIFICATES --- */
+        .cert-img {
+            width: 100%; border-radius: 8px; margin-bottom: 20px;
+            border: 1px solid var(--border); opacity: 0.9; transition: 0.3s;
+        }
+        .card:hover .cert-img { opacity: 1; transform: scale(1.02); }
+        .meta-date { font-size: 0.85rem; color: #818cf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+
+        /* --- TIMELINE (Experience) --- */
+        .timeline-item {
+            border-left: 2px solid rgba(255,255,255,0.1);
+            padding-left: 30px; margin-bottom: 40px; position: relative;
+        }
         .timeline-item::before {
-            content: ''; position: absolute; left: -36px; top: 5px;
-            width: 10px; height: 10px; background: var(--bg-body);
-            border: 2px solid var(--accent); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-glow);
+            content: ''; position: absolute; left: -6px; top: 5px;
+            width: 10px; height: 10px; background: #818cf8; border-radius: 50%;
+            box-shadow: 0 0 10px #818cf8;
         }
-        .timeline-date { font-size: 0.85rem; color: var(--accent); font-family: 'Space Grotesk'; margin-bottom: 5px; display: block; }
-        .timeline-title { font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
-        .timeline-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; }
         
-        .cert-img-small {
-            width: 100%; max-width: 200px; border-radius: 5px; margin-top: 10px;
-            border: 1px solid var(--border); opacity: 0.8; transition: 0.3s;
-        }
-        .timeline-item:hover .cert-img-small { opacity: 1; transform: scale(1.02); }
-
         /* --- CONTACT FORM --- */
-        .contact-form input, .contact-form textarea {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
-            color: #fff; border-radius: 5px; font-family: 'Inter'; font-size: 1rem; margin-bottom: 15px;
+        .contact-wrapper {
+            background: var(--bg-card);
+            padding: 40px; border-radius: 20px; border: 1px solid var(--border);
+            max-width: 800px; margin: 0 auto;
         }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         
-        /* --- MOBILE --- */
-        .menu-toggle { display: none; position: fixed; top: 20px; right: 20px; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); padding: 10px; border-radius: 5px; z-index: 200; }
+        input, textarea {
+            width: 100%; padding: 15px;
+            background: rgba(0,0,0,0.2); border: 1px solid var(--border);
+            border-radius: 8px; color: #fff; font-size: 1rem; font-family: inherit;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #818cf8; }
 
-        @media (max-width: 900px) {
-            * { cursor: auto; } .cursor-dot, .cursor-outline { display: none; }
-            .sidebar { transform: translateX(-100%); width: 280px; height: 100%; top: 0; left: 0; }
-            .sidebar.active { transform: translateX(0); }
-            .menu-toggle { display: block; }
-            .main-content { margin-left: 0; padding: 40px 20px; }
-            .hero h1 { font-size: 3rem; }
-            #contact-grid { grid-template-columns: 1fr !important; }
+        /* --- MOBILE MENU --- */
+        .menu-btn { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .hero h1 { font-size: 2.8rem; }
+            .form-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div id="preloader"><div class="loader-text">SYSTEM INITIALIZING</div><div class="loader-bar"></div></div>
-    <div class="cursor-dot"></div><div class="cursor-outline"></div>
-    <div id="particles-js"></div>
-    <div id="progress-container"><div id="progress-bar"></div></div>
-    <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-
-    <aside class="sidebar" id="sidebar">
-        <div class="profile-section" style="text-align: center;">
-            <img src="profile.jpeg" alt="Harsh Singh" class="profile-img">
-            <h2 style="font-size: 1.4rem; margin-bottom: 5px;">Harsh Singh</h2>
-            <p style="color: var(--accent); font-size: 0.9rem; font-family: 'Space Grotesk';">B.Sc IT Student</p>
-        </div>
+    <nav>
+        <div class="logo">Harsh<span>.dev</span></div>
         <ul class="nav-links">
-            <li><a href="#about" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#skills" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-code"></i> Skills</a></li>
-            <li><a href="#projects" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-laptop-code"></i> Projects</a></li>
-            <li><a href="#experience" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-history"></i> Experience</a></li>
-            <li><a href="#contact" class="hover-trigger" onclick="toggleMenu()"><i class="fas fa-paper-plane"></i> Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certificates</a></li>
         </ul>
-        <div class="social-links">
-            <a href="https://github.com/harsh2055" target="_blank" class="hover-trigger"><i class="fab fa-github"></i></a>
-            <a href="mailto:harshs288375@gmail.com" class="hover-trigger"><i class="fas fa-envelope"></i></a>
-            <a href="#" class="hover-trigger"><i class="fab fa-linkedin"></i></a>
+        <a href="#contact" class="btn-nav">Hire Me</a>
+        <div class="menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <img src="profile.jpeg" alt="Harsh Singh" class="profile-img-lg">
+            <h1>Building Digital <br> <span class="gradient-text">Experiences That Matter</span></h1>
+            <p>I am a B.Sc IT Student & Developer based in Mumbai. I build accessible, pixel-perfect, and performant web applications.</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="resume.pdf" download="Harsh_Singh_Resume" class="btn-primary">
+                    Download Resume <i class="fas fa-download"></i>
+                </a>
+                <a href="https://github.com/harsh2055" target="_blank" class="btn-secondary">
+                    View GitHub <i class="fab fa-github"></i>
+                </a>
+            </div>
         </div>
-    </aside>
+    </section>
 
-    <main class="main-content">
-        
-        <section id="hero" class="hero reveal active">
-            <p style="color: var(--accent); font-family: 'Space Grotesk'; margin-bottom: 20px;">Hi, my name is</p>
-            <h1>Harsh Singh.</h1>
-            <h2>I am a <span class="typing-text"></span></h2>
-            <p>I am a software developer based in Mumbai, specializing in building exceptional digital experiences. Currently focused on full-stack development, AI integration, and backend systems.</p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="resume.pdf" download="Harsh_Singh_Resume" class="btn hover-trigger"><i class="fas fa-download"></i> Download Resume</a>
-                <a href="#contact" class="btn hover-trigger" style="border-color: var(--text-muted); color: var(--text-main);">Contact Me</a>
-            </div>
-        </section>
-
-        <section id="about" class="reveal">
-            <h2 class="section-title"><span>01.</span> About Me</h2>
-            <div style="max-width: 800px;">
-                <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.05rem;">
-                    Hello! My name is Harsh and I enjoy creating things that live on the internet. My journey started with a curiosity for how websites work, which led me to dive deep into <strong>HTML, CSS, and Java</strong>.
-                    <br><br>
-                    Fast-forward to today, I'm a final year <strong>B.Sc. IT</strong> student at Reena Mehta College. I've built meaningful projects like a <strong>Car Rental System</strong> and an <strong>AI Code Critic</strong>. I'm passionate about writing clean, efficient code and solving real-world problems.
-                </p>
-            </div>
-        </section>
-
-        <section id="skills" class="reveal">
-            <h2 class="section-title"><span>02.</span> Tech Stack</h2>
-            <div class="marquee hover-trigger">
-                <div class="marquee-content">
-                    <span class="tech-icon"><i class="fab fa-java"></i> Java</span>
-                    <span class="tech-icon"><i class="fab fa-python"></i> Python</span>
-                    <span class="tech-icon"><i class="fab fa-js"></i> JavaScript</span>
-                    <span class="tech-icon"><i class="fas fa-database"></i> MySQL</span>
-                    <span class="tech-icon"><i class="fab fa-html5"></i> HTML5</span>
-                    <span class="tech-icon"><i class="fas fa-leaf"></i> Spring Boot</span>
-                    <span class="tech-icon"><i class="fab fa-git-alt"></i> Git</span>
-                    <span class="tech-icon"><i class="fas fa-robot"></i> Gemini AI</span>
-                    <span class="tech-icon"><i class="fas fa-chart-line"></i> Tableau</span>
-                    <span class="tech-icon"><i class="fab fa-java"></i> Java</span>
-                    <span class="tech-icon"><i class="fab fa-python"></i> Python</span>
-                    <span class="tech-icon"><i class="fab fa-js"></i> JavaScript</span>
-                    <span class="tech-icon"><i class="fas fa-database"></i> MySQL</span>
-                    <span class="tech-icon"><i class="fab fa-html5"></i> HTML5</span>
-                    <span class="tech-icon"><i class="fas fa-leaf"></i> Spring Boot</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="reveal">
-            <h2 class="section-title"><span>03.</span> Projects</h2>
+    <section id="skills">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Technical <span class="gradient-text">Expertise</span></h2>
             <div class="grid">
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                            <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                <div class="card">
+                    <h3><i class="fas fa-code" style="color: #818cf8;"></i> Languages</h3>
+                    <div class="skill-container">
+                        <span class="skill-pill"><i class="fab fa-java"></i> Java</span>
+                        <span class="skill-pill"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-pill"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="skill-pill"><i class="fas fa-database"></i> SQL</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-layer-group" style="color: #a855f7;"></i> Frameworks</h3>
+                    <div class="skill-container">
+                        <span class="skill-pill"><i class="fas fa-leaf"></i> Spring Boot</span>
+                        <span class="skill-pill"><i class="fab fa-react"></i> React</span>
+                        <span class="skill-pill"><i class="fab fa-node"></i> Node.js</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tools" style="color: #ec4899;"></i> Tools</h3>
+                    <div class="skill-container">
+                        <span class="skill-pill"><i class="fab fa-git-alt"></i> Git</span>
+                        <span class="skill-pill"><i class="fas fa-chart-bar"></i> Tableau</span>
+                        <span class="skill-pill"><i class="fas fa-robot"></i> Gemini AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Featured <span class="gradient-text">Work</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <div style="margin-bottom: 20px;">
+                        <span class="meta-date">Full Stack</span>
                         <h3>Car Rental (DriveX)</h3>
-                        <p>Full-stack booking system with real-time availability checks.</p>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">HTML · JS · MySQL</p>
                     </div>
+                    <p>A comprehensive car booking platform featuring real-time availability checks, secure payment simulation, and an intuitive user dashboard.</p>
+                    <div class="skill-container" style="margin-bottom: 25px;">
+                        <span class="skill-pill">HTML</span><span class="skill-pill">JS</span><span class="skill-pill">MySQL</span>
+                    </div>
+                    <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" class="btn-secondary" style="justify-content: center; width: 100%;">View Live Demo</a>
                 </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                            <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
+
+                <div class="card">
+                    <div style="margin-bottom: 20px;">
+                        <span class="meta-date">AI Integrated</span>
                         <h3>Code Critic AI</h3>
-                        <p>Intelligent platform providing instant code feedback using AI.</p>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">React · Node · AI API</p>
                     </div>
+                    <p>An intelligent code analysis tool. Developers can paste snippets to receive instant AI-powered feedback on bugs and readability.</p>
+                    <div class="skill-container" style="margin-bottom: 25px;">
+                        <span class="skill-pill">React</span><span class="skill-pill">AI API</span>
+                    </div>
+                    <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" class="btn-secondary" style="justify-content: center; width: 100%;">View Live Demo</a>
                 </div>
-                <div class="card hover-trigger" data-tilt>
-                    <div class="card-content">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                            <a href="https://expense-flow-a4f205d8.base44.app" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
+
+                <div class="card">
+                    <div style="margin-bottom: 20px;">
+                        <span class="meta-date">Dashboard</span>
                         <h3>Expense Flow</h3>
-                        <p>Personal finance dashboard for tracking budgets and spending.</p>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto;">JS · Chart.js · CSS</p>
                     </div>
+                    <p>A personal finance application to track income and expenses. Features dynamic charts for visual budget analysis.</p>
+                    <div class="skill-container" style="margin-bottom: 25px;">
+                        <span class="skill-pill">Chart.js</span><span class="skill-pill">CSS Grid</span>
+                    </div>
+                    <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" class="btn-secondary" style="justify-content: center; width: 100%;">View Live Demo</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="experience" class="reveal">
-            <h2 class="section-title"><span>04.</span> Journey & Certifications</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-date">2023 - Present</span>
-                    <h3 class="timeline-title">B.Sc. Information Technology</h3>
-                    <p class="timeline-subtitle">Reena Mehta College, Mumbai University</p>
+    <section id="certifications">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Professional <span class="gradient-text">Certificates</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="jpmorgan.png" alt="JP Morgan" class="cert-img">
+                    <span class="meta-date">Feb 2026</span>
+                    <h3>Software Engineering</h3>
+                    <p>JPMorgan Chase & Co. (Forage)</p>
                 </div>
-                
-                <div class="timeline-item">
-                    <span class="timeline-date">Feb 2026</span>
-                    <h3 class="timeline-title">Software Engineering Job Simulation</h3>
-                    <p class="timeline-subtitle">JPMorgan Chase & Co. (Forage)</p>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Built Spring Boot microservices with Kafka & REST APIs.</p>
-                    <img src="jpmorgan.png" alt="Cert" class="cert-img-small hover-trigger">
+                <div class="card">
+                    <img src="deloitte.png" alt="Deloitte" class="cert-img">
+                    <span class="meta-date">Feb 2026</span>
+                    <h3>Data Analytics</h3>
+                    <p>Deloitte Australia (Forage)</p>
                 </div>
-
-                 <div class="timeline-item">
-                    <span class="timeline-date">Feb 2026</span>
-                    <h3 class="timeline-title">Data Analytics Job Simulation</h3>
-                    <p class="timeline-subtitle">Deloitte Australia (Forage)</p>
-                    <img src="deloitte.png" alt="Cert" class="cert-img-small hover-trigger">
-                </div>
-
-                <div class="timeline-item">
-                    <span class="timeline-date">Jan 2026</span>
-                    <h3 class="timeline-title">Gemini Certified Professional</h3>
-                    <p class="timeline-subtitle">Google for Education</p>
+                <div class="card">
                     <div style="display: flex; gap: 10px;">
-                        <img src="gemini-student.jpeg" alt="Cert" class="cert-img-small hover-trigger" style="width: 120px;">
-                        <img src="gemini-educator.jpeg" alt="Cert" class="cert-img-small hover-trigger" style="width: 120px;">
+                        <img src="gemini-student.jpeg" alt="Gemini" class="cert-img" style="width: 50%;">
+                        <img src="gemini-educator.jpeg" alt="Gemini" class="cert-img" style="width: 50%;">
                     </div>
+                    <span class="meta-date">Jan 2026</span>
+                    <h3>Gemini Certified</h3>
+                    <p>Google for Education</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="reveal" style="margin-bottom: 50px;">
-            <h2 class="section-title"><span>05.</span> Live Stats & Contact</h2>
-            <div id="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
-                
-                <div class="card" data-tilt style="padding: 20px;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fab fa-github" style="color: var(--accent);"></i> Activity</h3>
-                    <img src="https://github-readme-stats.vercel.app/api?username=harsh2055&show_icons=true&theme=dark&hide_border=true&bg_color=00000000&title_color=10b981&icon_color=10b981&text_color=94a3b8" alt="Stats" style="width: 100%;">
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=harsh2055&theme=dark&hide_border=true&background=00000000&stroke=10b981&ring=10b981&fire=10b981&currStreakLabel=10b981&currStreakNum=e2e8f0&sideNums=e2e8f0&sideLabels=e2e8f0" alt="Streak" style="width: 100%; margin-top: 10px;">
+    <section id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-size: 2.5rem;">Get In <span class="gradient-text">Touch</span></h2>
+                    <p style="color: var(--text-muted);">Have a project in mind or want to hire me?</p>
                 </div>
 
-                <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af"> 
-                    <input type="text" name="name" placeholder="Your Name" required class="hover-trigger">
-                    <input type="email" name="email" placeholder="Your Email" required class="hover-trigger">
-                    <textarea name="message" placeholder="Message" required class="hover-trigger" style="height: 120px;"></textarea>
-                    <button type="submit" class="btn hover-trigger" style="width: 100%; justify-content: center;">Send <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="2867b1bf-2cd2-4d26-86f7-1a6af50243af">
+                    
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 20px;">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 20px;">
-            <p>Designed & Built by Harsh Singh © 2026</p>
-        </footer>
-    </main>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted);">
+        <p>© 2026 Harsh Singh. All rights reserved.</p>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    <script>
-        // Init Scripts
-        window.addEventListener("load", () => { document.getElementById('preloader').style.opacity = '0'; setTimeout(() => document.getElementById('preloader').style.display = 'none', 500); });
-        
-        // Cursor
-        const dot = document.querySelector('.cursor-dot'), outline = document.querySelector('.cursor-outline');
-        window.addEventListener("mousemove", (e) => { 
-            dot.style.left = `${e.clientX}px`; dot.style.top = `${e.clientY}px`; 
-            outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
-        });
-        document.querySelectorAll('.hover-trigger').forEach(i => {
-            i.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            i.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
-
-        // Typing
-        const textElement = document.querySelector('.typing-text');
-        const words = ["Developer.", "Creator.", "Innovator."];
-        let w=0, c=0, d=false;
-        function type() {
-            let word = words[w];
-            if(d) { textElement.textContent = word.substring(0, c-1); c--; } else { textElement.textContent = word.substring(0, c+1); c++; }
-            if(!d && c === word.length) { d=true; setTimeout(type, 2000); } else if(d && c===0) { d=false; w=(w+1)%words.length; setTimeout(type, 500); } else { setTimeout(type, d?100:150); }
-        }
-        document.addEventListener('DOMContentLoaded', type);
-
-        // Particles & Tilt
-        particlesJS("particles-js", { "particles": { "number": { "value": 30 }, "size": { "value": 3 }, "color": { "value": "#10b981" }, "line_linked": { "enable": true, "distance": 150, "color": "#10b981", "opacity": 0.2 }, "move": { "enable": true, "speed": 1 } } });
-        VanillaTilt.init(document.querySelectorAll(".card"), { max: 10, speed: 400, glare: true, "max-glare": 0.1 });
-
-        // Menu & Scroll
-        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.reveal').forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 150) r.classList.add('active'); });
-            document.getElementById('progress-bar').style.width = ((document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100) + "%";
-        });
-    </script>
 </body>
 </html>
