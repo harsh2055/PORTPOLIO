@@ -12,12 +12,13 @@
     <style>
         :root {
             --bg-body: #0b0e14;
-            --bg-card: rgba(21, 26, 35, 0.7); /* Transparent for glass effect */
+            --bg-sidebar: rgba(11, 14, 20, 0.8);
+            --bg-card: rgba(21, 26, 35, 0.6);
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent: #10b981; /* Neon Green */
             --accent-glow: rgba(16, 185, 129, 0.4);
-            --border: rgba(45, 55, 72, 0.5);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,9 +32,33 @@
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.05) 0%, transparent 20%);
+        }
+
+        /* --- PARTICLES CONTAINER --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Behind everything */
+        }
+
+        /* --- SCROLL PROGRESS BAR --- */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 1000;
+            background: transparent;
+        }
+        #progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
@@ -42,7 +67,7 @@
         /* --- SIDEBAR --- */
         .sidebar {
             width: 280px;
-            background: rgba(11, 14, 20, 0.95);
+            background: var(--bg-sidebar);
             border-right: 1px solid var(--border);
             position: fixed;
             height: 100vh;
@@ -51,7 +76,8 @@
             flex-direction: column;
             justify-content: space-between;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
         }
 
         .profile-img {
@@ -65,7 +91,6 @@
             box-shadow: 0 0 25px var(--accent-glow);
             transition: transform 0.5s ease;
         }
-
         .profile-img:hover { transform: scale(1.05) rotate(5deg); }
 
         .nav-links { list-style: none; margin-top: 40px; }
@@ -81,18 +106,7 @@
             position: relative;
             overflow: hidden;
         }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; height: 100%; width: 0;
-            background: rgba(16, 185, 129, 0.1);
-            transition: 0.3s;
-            z-index: -1;
-        }
-
-        .nav-links a:hover::before { width: 100%; }
-        .nav-links a:hover { color: var(--accent); transform: translateX(5px); }
+        .nav-links a:hover { color: var(--accent); background: rgba(16, 185, 129, 0.05); }
         .nav-links i { margin-right: 12px; width: 20px; }
 
         .social-links { display: flex; justify-content: center; gap: 20px; }
@@ -107,7 +121,7 @@
             position: relative;
         }
 
-        /* Scroll Animation Class */
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -123,34 +137,19 @@
             display: flex;
             align-items: center;
         }
-
         .section-title::after {
-            content: '';
-            height: 1px;
-            background: var(--border);
-            flex: 1;
-            margin-left: 20px;
+            content: ''; height: 1px; background: var(--border); flex: 1; margin-left: 20px;
         }
-
         .section-title span { color: var(--accent); margin-right: 10px; font-family: 'Space Grotesk'; }
 
         /* --- HERO --- */
         .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
-        
         .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
         .hero h2 { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 25px; }
         
-        /* Typing Effect Cursor */
         .typing-text { color: var(--accent); position: relative; }
-        .typing-text::after {
-            content: '|';
-            position: absolute;
-            right: -10px;
-            animation: blink 0.7s infinite;
-        }
+        .typing-text::after { content: '|'; position: absolute; right: -10px; animation: blink 0.7s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .hero p { max-width: 600px; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.8; }
 
         .btn {
             padding: 16px 35px;
@@ -165,21 +164,16 @@
             overflow: hidden;
             background: transparent;
             z-index: 1;
+            cursor: pointer;
         }
-
         .btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 0%;
-            background: var(--accent);
-            transition: 0.3s;
-            z-index: -1;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+            background: var(--accent); transition: 0.3s; z-index: -1;
         }
-
         .btn:hover::after { height: 100%; }
         .btn:hover { color: #0b0e14; box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* --- CARDS (Glassmorphism) --- */
+        /* --- CARDS (3D Tilt) --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -189,25 +183,20 @@
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            backdrop-filter: blur(5px);
             border-radius: 12px;
             padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: 100%;
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: hidden;
+            transform-style: preserve-3d; /* For 3D effect */
+            transform: perspective(1000px);
         }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
+        
+        /* Inner content for 3D depth */
+        .card-content { transform: translateZ(20px); }
 
         .card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
 
         /* --- SKILLS --- */
         .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -236,37 +225,80 @@
             transition: 0.4s;
             filter: grayscale(20%);
         }
-        .card:hover .cert-img { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
+        .card:hover .cert-img { opacity: 1; filter: grayscale(0%); }
 
         .date-badge {
-            font-size: 0.75rem;
-            color: var(--accent);
-            font-family: 'Space Grotesk';
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
+            font-size: 0.75rem; color: var(--accent); font-family: 'Space Grotesk';
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block;
         }
 
-        /* --- MOBILE --- */
+        /* --- BACK TO TOP BUTTON --- */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: #0b0e14;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            box-shadow: 0 0 20px var(--accent-glow);
+            z-index: 90;
+        }
+        #back-to-top.show { opacity: 1; pointer-events: all; }
+
+        /* --- MOBILE TOGGLE --- */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 200;
+            cursor: pointer;
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 900px) {
-            body { flex-direction: column; }
             .sidebar {
-                width: 100%; height: auto; position: relative;
-                padding: 20px; border-right: none; border-bottom: 1px solid var(--border);
-                align-items: center;
+                transform: translateX(-100%); /* Hide sidebar by default */
+                width: 280px;
+                height: 100%;
+                top: 0; left: 0;
             }
-            .nav-links { display: none; }
+            .sidebar.active { transform: translateX(0); } /* Slide in */
+            
+            .menu-toggle { display: block; }
+            
             .main-content { margin-left: 0; padding: 40px 20px; }
             .hero h1 { font-size: 3rem; }
             .hero h2 { font-size: 1.5rem; }
-            .profile-img { margin-bottom: 10px; width: 100px; height: 100px; }
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
+    <div id="particles-js"></div>
+
+    <div id="progress-container"><div id="progress-bar"></div></div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
         <div class="profile-section" style="text-align: center;">
             <img src="profile.jpeg" alt="Harsh Singh" class="profile-img">
             <h2 style="font-size: 1.4rem; margin-bottom: 5px;">Harsh Singh</h2>
@@ -274,11 +306,11 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
-            <li><a href="#projects"><i class="fas fa-laptop-code"></i> Projects</a></li>
-            <li><a href="#certifications"><i class="fas fa-certificate"></i> Certificates</a></li>
-            <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+            <li><a href="#about" onclick="toggleMenu()"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#skills" onclick="toggleMenu()"><i class="fas fa-code"></i> Skills</a></li>
+            <li><a href="#projects" onclick="toggleMenu()"><i class="fas fa-laptop-code"></i> Projects</a></li>
+            <li><a href="#certifications" onclick="toggleMenu()"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="#contact" onclick="toggleMenu()"><i class="fas fa-paper-plane"></i> Contact</a></li>
         </ul>
 
         <div class="social-links">
@@ -310,7 +342,7 @@
 
         <section id="about" class="reveal">
             <h2 class="section-title"><span>01.</span> About Me</h2>
-            <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 40px; align-items: center;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;">
                 <div>
                     <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.05rem;">
                         Hello! My name is Harsh and I enjoy creating things that live on the internet. My journey started with a curiosity for how websites work, which led me to dive deep into <strong>HTML, CSS, and Java</strong>.
@@ -324,24 +356,28 @@
         <section id="skills" class="reveal">
             <h2 class="section-title"><span>02.</span> Tech Stack</h2>
             <div class="grid">
-                <div class="card">
-                    <h3><i class="fas fa-code" style="color: var(--accent);"></i> Languages</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Java</span>
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">SQL</span>
-                        <span class="skill-item">HTML5 & CSS3</span>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <h3><i class="fas fa-code" style="color: var(--accent);"></i> Languages</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Java</span>
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">JavaScript</span>
+                            <span class="skill-item">SQL</span>
+                            <span class="skill-item">HTML5 & CSS3</span>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <h3><i class="fas fa-tools" style="color: var(--accent);"></i> Tools & Frameworks</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Spring Boot</span>
-                        <span class="skill-item">Git & GitHub</span>
-                        <span class="skill-item">VS Code</span>
-                        <span class="skill-item">Tableau</span>
-                        <span class="skill-item">Gemini AI</span>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <h3><i class="fas fa-tools" style="color: var(--accent);"></i> Tools & Frameworks</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Spring Boot</span>
+                            <span class="skill-item">Git & GitHub</span>
+                            <span class="skill-item">VS Code</span>
+                            <span class="skill-item">Tableau</span>
+                            <span class="skill-item">Gemini AI</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -350,39 +386,45 @@
         <section id="projects" class="reveal">
             <h2 class="section-title"><span>03.</span> Projects</h2>
             <div class="grid">
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                        <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <h3>Car Rental (DriveX)</h3>
-                    <p>A full-stack booking system. Users can browse cars, check availability in real-time, and simulate secure bookings.</p>
-                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                        <span>HTML</span> <span>CSS</span> <span>JS</span> <span>MySQL</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                        <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <h3>Code Critic AI</h3>
-                    <p>An intelligent platform providing instant feedback on code snippets. Uses AI to analyze logic and suggest improvements.</p>
-                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                        <span>React</span> <span>AI API</span> <span>Node.js</span>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                            <a href="https://car-rental-website-e8y3.onrender.com/" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <h3>Car Rental (DriveX)</h3>
+                        <p>A full-stack booking system. Users can browse cars, check availability in real-time, and simulate secure bookings.</p>
+                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>HTML</span> <span>CSS</span> <span>JS</span> <span>MySQL</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
-                        <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                            <a href="https://code-critic-ai-de7cf6dc.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <h3>Code Critic AI</h3>
+                        <p>An intelligent platform providing instant feedback on code snippets. Uses AI to analyze logic and suggest improvements.</p>
+                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>React</span> <span>AI API</span> <span>Node.js</span>
+                        </div>
                     </div>
-                    <h3>Expense Flow</h3>
-                    <p>A personal finance dashboard visualizing spending habits with budget setting and expense categorization.</p>
-                    <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
-                        <span>JS</span> <span>Chart.js</span> <span>CSS Grid</span>
+                </div>
+
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-folder" style="font-size: 2rem; color: var(--accent);"></i>
+                            <a href="https://expense-flow-a4f205d8.base44.app" target="_blank" style="color: var(--text-main);"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <h3>Expense Flow</h3>
+                        <p>A personal finance dashboard visualizing spending habits with budget setting and expense categorization.</p>
+                        <div class="skill-list" style="margin-top: auto; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>JS</span> <span>Chart.js</span> <span>CSS Grid</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -391,29 +433,37 @@
         <section id="certifications" class="reveal">
             <h2 class="section-title"><span>04.</span> Certifications</h2>
             <div class="grid">
-                <div class="card">
-                    <img src="gemini-student.jpeg" alt="Gemini Cert" class="cert-img">
-                    <span class="date-badge">Jan 2026</span>
-                    <h3>Gemini Certified Student</h3>
-                    <p>Google for Education</p>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <img src="gemini-student.jpeg" alt="Gemini Cert" class="cert-img">
+                        <span class="date-badge">Jan 2026</span>
+                        <h3>Gemini Certified Student</h3>
+                        <p>Google for Education</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <img src="gemini-educator.jpeg" alt="Gemini Cert" class="cert-img">
-                    <span class="date-badge">Jan 2026</span>
-                    <h3>Gemini Certified Educator</h3>
-                    <p>Google for Education</p>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <img src="gemini-educator.jpeg" alt="Gemini Cert" class="cert-img">
+                        <span class="date-badge">Jan 2026</span>
+                        <h3>Gemini Certified Educator</h3>
+                        <p>Google for Education</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <img src="jpmorgan.png" alt="JPM Cert" class="cert-img">
-                    <span class="date-badge">Feb 2026</span>
-                    <h3>Software Engineering Sim</h3>
-                    <p>JPMorgan Chase & Co. (Forage)</p>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <img src="jpmorgan.png" alt="JPM Cert" class="cert-img">
+                        <span class="date-badge">Feb 2026</span>
+                        <h3>Software Engineering Sim</h3>
+                        <p>JPMorgan Chase & Co. (Forage)</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <img src="deloitte.png" alt="Deloitte Cert" class="cert-img">
-                    <span class="date-badge">Feb 2026</span>
-                    <h3>Data Analytics Sim</h3>
-                    <p>Deloitte Australia (Forage)</p>
+                <div class="card" data-tilt>
+                    <div class="card-content">
+                        <img src="deloitte.png" alt="Deloitte Cert" class="cert-img">
+                        <span class="date-badge">Feb 2026</span>
+                        <h3>Data Analytics Sim</h3>
+                        <p>Deloitte Australia (Forage)</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -436,10 +486,43 @@
 
     </main>
 
+    <a href="#" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    
     <script>
-        // 1. Typing Animation
+        // 1. Particle Config
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 40 },
+                "size": { "value": 3 },
+                "color": { "value": "#10b981" },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#10b981",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" } }
+            }
+        });
+
+        // 2. 3D Tilt Init
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 10,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2
+        });
+
+        // 3. Typing Animation
         const textElement = document.querySelector('.typing-text');
-        const words = ["Developer.", "Student.", "Creator.", "Tech Enthusiast."];
+        const words = ["Developer.", "Student.", "Creator.", "Innovator."];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -456,32 +539,46 @@
 
             if (!isDeleting && charIndex === currentWord.length) {
                 isDeleting = true;
-                setTimeout(type, 2000); // Wait before deleting
+                setTimeout(type, 2000);
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % words.length;
-                setTimeout(type, 500); // Wait before typing next word
+                setTimeout(type, 500);
             } else {
                 setTimeout(type, isDeleting ? 100 : 150);
             }
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // 2. Scroll Reveal Animation
+        // 4. Scroll Reveal & Progress Bar & Back to Top
         const revealElements = document.querySelectorAll('.reveal');
+        const progressBar = document.getElementById('progress-bar');
+        const backToTop = document.getElementById('back-to-top');
         
-        const revealOnScroll = () => {
+        window.addEventListener('scroll', () => {
+            // Reveal
             const windowHeight = window.innerHeight;
-            const elementVisible = 150;
-
             revealElements.forEach((reveal) => {
                 const elementTop = reveal.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('active');
-                }
+                if (elementTop < windowHeight - 150) reveal.classList.add('active');
             });
-        };
-        window.addEventListener('scroll', revealOnScroll);
+
+            // Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+
+            // Back to Top
+            if (winScroll > 500) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+
+        // 5. Mobile Menu Toggle
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
